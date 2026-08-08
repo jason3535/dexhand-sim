@@ -157,6 +157,25 @@ h3.sub::before { content:""; display:inline-block; width:7px; height:7px; backgr
 .foot { margin-top:36px; padding-top:20px; border-top:1px solid var(--line);
   font-family:var(--mono); font-size:11px; color:var(--faint); letter-spacing:0.04em; line-height:1.9; }
 
+html { scroll-behavior:smooth; }
+.section { scroll-margin-top:14px; }
+
+/* ---- 目录 ---- */
+.toc { border:1px solid var(--ink); background:var(--paper); margin-top:40px; }
+.toc-head { display:flex; align-items:center; gap:10px; padding:12px 18px; border-bottom:1px solid var(--ink);
+  font-family:var(--mono); font-size:11px; letter-spacing:0.22em; }
+.toc-head::before { content:""; width:7px; height:7px; border-radius:50%; background:var(--red); flex:none; }
+.toc-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); }
+.toc-grid a { display:flex; align-items:baseline; gap:9px; padding:11px 16px; background:var(--paper);
+  color:var(--ink); text-decoration:none; font-size:13.5px; transition:all .15s ease; }
+.toc-grid a .n { font-family:var(--mono); font-size:11px; color:var(--red); letter-spacing:0.1em; flex:none; }
+.toc-grid a:hover { background:var(--soft); color:var(--red); }
+
+#totop { position:fixed; right:22px; bottom:22px; z-index:20; display:none;
+  font-family:var(--mono); font-size:11px; letter-spacing:0.18em; color:var(--ink);
+  background:var(--paper); border:1px solid var(--ink); padding:9px 14px; text-decoration:none; }
+#totop:hover { color:var(--red); border-color:var(--red); }
+
 .reveal { opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease; }
 .reveal.in { opacity:1; transform:none; }
 
@@ -166,8 +185,10 @@ h3.sub::before { content:""; display:inline-block; width:7px; height:7px; backgr
   .mr-steps { grid-template-columns:1fr; }
   .vs-row { grid-template-columns:1fr 92px 1fr; }
   .plate-row { grid-template-columns:1fr; }
+  .toc-grid { grid-template-columns:1fr 1fr; }
 }
 @media (prefers-reduced-motion:reduce) {
+  html { scroll-behavior:auto; }
   .reveal { opacity:1; transform:none; transition:none; }
   .card:hover { transform:none; }
 }
@@ -189,8 +210,30 @@ h3.sub::before { content:""; display:inline-block; width:7px; height:7px; backgr
     <div class="meta">16&nbsp;节&nbsp;&nbsp;/&nbsp;&nbsp;约&nbsp;30&nbsp;分钟&nbsp;&nbsp;/&nbsp;&nbsp;含实测数据与竞品对比</div>
   </div>
 
+  <nav class="toc" id="toc" aria-label="目录">
+    <div class="toc-head">INDEX&nbsp;·&nbsp;目录</div>
+    <div class="toc-grid">
+      <a href="#s00"><span class="n">00/</span>先劝退</a>
+      <a href="#s01"><span class="n">01/</span>难在哪</a>
+      <a href="#s02"><span class="n">02/</span>术语速查</a>
+      <a href="#s03"><span class="n">03/</span>三种驱动</a>
+      <a href="#s04"><span class="n">04/</span>抓取分类学</a>
+      <a href="#s05"><span class="n">05/</span>触觉</a>
+      <a href="#s06"><span class="n">06/</span>硬件选型</a>
+      <a href="#s07"><span class="n">07/</span>头部竞品</a>
+      <a href="#s08"><span class="n">08/</span>供应链</a>
+      <a href="#s09"><span class="n">09/</span>仿真环境</a>
+      <a href="#s10"><span class="n">10/</span>两条路线</a>
+      <a href="#s11"><span class="n">11/</span>数据瓶颈</a>
+      <a href="#s12"><span class="n">12/</span>六个月路线</a>
+      <a href="#s13"><span class="n">13/</span>实测踩坑</a>
+      <a href="#s14"><span class="n">14/</span>该读什么</a>
+      <a href="#s15"><span class="n">15/</span>何时买手</a>
+    </div>
+  </nav>
+
   <!-- 00 -->
-  <div class="section reveal">
+  <div class="section reveal" id="s00">
     <div class="sec-head">
       <div class="sec-idx">00/</div>
       <div class="overline"></div>
@@ -226,7 +269,7 @@ h3.sub::before { content:""; display:inline-block; width:7px; height:7px; backgr
   </div>
 
   <!-- 01 -->
-  <div class="section reveal">
+  <div class="section reveal" id="s01">
     <div class="sec-head">
       <div class="sec-idx">01/</div>
       <div class="overline"></div>
@@ -258,7 +301,7 @@ h3.sub::before { content:""; display:inline-block; width:7px; height:7px; backgr
   </div>
 
   <!-- 02 -->
-  <div class="section reveal">
+  <div class="section reveal" id="s02">
     <div class="sec-head">
       <div class="sec-idx">02/</div>
       <div class="overline"></div>
@@ -326,7 +369,7 @@ h3.sub::before { content:""; display:inline-block; width:7px; height:7px; backgr
   </div>
 
   <!-- 03 -->
-  <div class="section reveal">
+  <div class="section reveal" id="s03">
     <div class="sec-head">
       <div class="sec-idx">03/</div>
       <div class="overline"></div>
@@ -368,7 +411,7 @@ h3.sub::before { content:""; display:inline-block; width:7px; height:7px; backgr
   </div>
 
   <!-- 04 -->
-  <div class="section reveal">
+  <div class="section reveal" id="s04">
     <div class="sec-head">
       <div class="sec-idx">04/</div>
       <div class="overline"></div>
@@ -398,7 +441,7 @@ h3.sub::before { content:""; display:inline-block; width:7px; height:7px; backgr
   </div>
 
   <!-- 05 -->
-  <div class="section reveal">
+  <div class="section reveal" id="s05">
     <div class="sec-head">
       <div class="sec-idx">05/</div>
       <div class="overline"></div>
@@ -433,7 +476,7 @@ h3.sub::before { content:""; display:inline-block; width:7px; height:7px; backgr
   </div>
 
   <!-- 06 -->
-  <div class="section reveal">
+  <div class="section reveal" id="s06">
     <div class="sec-head">
       <div class="sec-idx">06/</div>
       <div class="overline"></div>
@@ -526,7 +569,7 @@ h3.sub::before { content:""; display:inline-block; width:7px; height:7px; backgr
   </div>
 
   <!-- 07 -->
-  <div class="section reveal">
+  <div class="section reveal" id="s07">
     <div class="sec-head">
       <div class="sec-idx">07/</div>
       <div class="overline"></div>
@@ -635,7 +678,7 @@ h3.sub::before { content:""; display:inline-block; width:7px; height:7px; backgr
   </div>
 
   <!-- 08 -->
-  <div class="section reveal">
+  <div class="section reveal" id="s08">
     <div class="sec-head">
       <div class="sec-idx">08/</div>
       <div class="overline"></div>
@@ -772,7 +815,7 @@ h3.sub::before { content:""; display:inline-block; width:7px; height:7px; backgr
   </div>
 
   <!-- 08 -->
-  <div class="section reveal">
+  <div class="section reveal" id="s09">
     <div class="sec-head">
       <div class="sec-idx">09/</div>
       <div class="overline"></div>
@@ -828,7 +871,7 @@ h3.sub::before { content:""; display:inline-block; width:7px; height:7px; backgr
   </div>
 
   <!-- 09 -->
-  <div class="section reveal">
+  <div class="section reveal" id="s10">
     <div class="sec-head">
       <div class="sec-idx">10/</div>
       <div class="overline"></div>
@@ -882,7 +925,7 @@ h3.sub::before { content:""; display:inline-block; width:7px; height:7px; backgr
   </div>
 
   <!-- 10 -->
-  <div class="section reveal">
+  <div class="section reveal" id="s11">
     <div class="sec-head">
       <div class="sec-idx">11/</div>
       <div class="overline"></div>
@@ -920,7 +963,7 @@ h3.sub::before { content:""; display:inline-block; width:7px; height:7px; backgr
   </div>
 
   <!-- 11 -->
-  <div class="section reveal">
+  <div class="section reveal" id="s12">
     <div class="sec-head">
       <div class="sec-idx">12/</div>
       <div class="overline"></div>
@@ -986,7 +1029,7 @@ h3.sub::before { content:""; display:inline-block; width:7px; height:7px; backgr
   </div>
 
   <!-- 12 -->
-  <div class="section reveal">
+  <div class="section reveal" id="s13">
     <div class="sec-head">
       <div class="sec-idx">13/</div>
       <div class="overline"></div>
@@ -1032,7 +1075,7 @@ h3.sub::before { content:""; display:inline-block; width:7px; height:7px; backgr
   </div>
 
   <!-- 13 -->
-  <div class="section reveal">
+  <div class="section reveal" id="s14">
     <div class="sec-head">
       <div class="sec-idx">14/</div>
       <div class="overline"></div>
@@ -1103,7 +1146,7 @@ h3.sub::before { content:""; display:inline-block; width:7px; height:7px; backgr
   </div>
 
   <!-- 14 -->
-  <div class="section reveal">
+  <div class="section reveal" id="s15">
     <div class="sec-head">
       <div class="sec-idx">15/</div>
       <div class="overline"></div>
@@ -1148,11 +1191,17 @@ h3.sub::before { content:""; display:inline-block; width:7px; height:7px; backgr
   </div>
 
 </div>
+<a id="totop" href="#toc">INDEX&nbsp;·&nbsp;目录</a>
 <script>
 const io = new IntersectionObserver(es => es.forEach(e => {
   if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
 }), { threshold: 0.08 });
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+const tt = document.getElementById('totop');
+addEventListener('scroll', () => {
+  tt.style.display = scrollY > 900 ? 'block' : 'none';
+}, { passive: true });
 </script>
 </body>
 </html>
