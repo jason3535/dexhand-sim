@@ -1,0 +1,13 @@
+# Python 环境（105M，用 setup.sh 重建）
+.venv/
+__pycache__/
+*.pyc
+
+# 第三方模型库（30M，是 google-deepmind/mujoco_menagerie 的稀疏 checkout，
+# 用 setup.sh 重建，别提交进来）
+mujoco_menagerie/
+
+# MuJoCo 运行时吐的日志
+MUJOCO_LOG.TXT
+
+.DS_Store
