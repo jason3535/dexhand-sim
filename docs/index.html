@@ -1,0 +1,1699 @@
+<title>灵巧手入门全攻略</title>
+
+<style>
+/* ── 令牌：亮色为基准，两处覆盖只改令牌 ───────────────────────── */
+:root {
+  --paper:      #F0F0EA;
+  --surface:    #FAFAF6;
+  --surface-2:  #E6E6DE;
+  --ink:        #161A20;
+  --ink-soft:   #545E6B;
+  --ink-faint:  #838C97;
+  --rule:       #CDCEC4;
+  --rule-soft:  #DFDFD6;
+  --brass:      #8E6524;
+  --brass-soft: #B98B3E;
+  --teal:       #2A5A60;
+  --good:       #3A6034;
+  --warn:       #8A5312;
+  --bad:        #7C2C21;
+  --tint:       rgba(142,101,36,.07);
+  --shadow:     0 1px 2px rgba(20,24,30,.05), 0 8px 24px -12px rgba(20,24,30,.16);
+
+  --serif: "Songti SC", "STSong", "Source Han Serif SC", "Noto Serif CJK SC", "SimSun", Georgia, serif;
+  --sans:  "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --mono:  ui-monospace, "SF Mono", "JetBrains Mono", "IBM Plex Mono", Menlo, Consolas, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper:      #111419;
+    --surface:    #181C22;
+    --surface-2:  #212630;
+    --ink:        #E7E6DD;
+    --ink-soft:   #9BA4B0;
+    --ink-faint:  #6E7783;
+    --rule:       #2B313A;
+    --rule-soft:  #232830;
+    --brass:      #D5A15E;
+    --brass-soft: #A87C3C;
+    --teal:       #6FAEB3;
+    --good:       #7FA871;
+    --warn:       #D2A054;
+    --bad:        #D08072;
+    --tint:       rgba(213,161,94,.10);
+    --shadow:     0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.6);
+  }
+}
+
+:root[data-theme="dark"] {
+  --paper:      #111419;
+  --surface:    #181C22;
+  --surface-2:  #212630;
+  --ink:        #E7E6DD;
+  --ink-soft:   #9BA4B0;
+  --ink-faint:  #6E7783;
+  --rule:       #2B313A;
+  --rule-soft:  #232830;
+  --brass:      #D5A15E;
+  --brass-soft: #A87C3C;
+  --teal:       #6FAEB3;
+  --good:       #7FA871;
+  --warn:       #D2A054;
+  --bad:        #D08072;
+  --tint:       rgba(213,161,94,.10);
+  --shadow:     0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.6);
+}
+
+/* ── 基础 ──────────────────────────────────────────────────── */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16.5px;
+  line-height: 1.78;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a { color: var(--brass); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+a:hover { color: var(--ink); }
+:focus-visible { outline: 2px solid var(--brass); outline-offset: 3px; border-radius: 2px; }
+
+code, .m { font-family: var(--mono); font-size: .88em; }
+code {
+  background: var(--tint);
+  color: var(--ink);
+  padding: .1em .38em;
+  border-radius: 3px;
+  border: 1px solid var(--rule-soft);
+}
+
+/* ── 骨架 ──────────────────────────────────────────────────── */
+.wrap {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 clamp(18px, 4vw, 40px);
+}
+
+.shell {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+@media (min-width: 1040px) {
+  .shell { grid-template-columns: 205px minmax(0, 1fr); gap: 56px; align-items: start; }
+}
+
+main { max-width: 78ch; min-width: 0; }
+
+/* ── 目录导轨 ──────────────────────────────────────────────── */
+.rail { display: none; }
+@media (min-width: 1040px) {
+  .rail {
+    display: block;
+    position: sticky;
+    top: 28px;
+    padding-top: 8px;
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 1.5;
+  }
+}
+.rail-title {
+  color: var(--ink-faint);
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  font-size: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid var(--rule);
+}
+.rail ol { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 1px; }
+.rail a {
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  gap: 4px;
+  padding: 5px 6px 5px 0;
+  color: var(--ink-soft);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  padding-left: 9px;
+  transition: color .14s, border-color .14s;
+}
+.rail a:hover { color: var(--ink); border-left-color: var(--brass); }
+.rail a .n { color: var(--ink-faint); font-variant-numeric: tabular-nums; }
+
+/* ── 页眉 ──────────────────────────────────────────────────── */
+header.top {
+  border-bottom: 1px solid var(--rule);
+  background: var(--surface);
+  padding: clamp(38px, 6vw, 72px) 0 0;
+}
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--brass);
+}
+
+h1 {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: clamp(34px, 6.4vw, 60px);
+  line-height: 1.14;
+  letter-spacing: .01em;
+  margin: 14px 0 0;
+  text-wrap: balance;
+}
+
+.standfirst {
+  font-size: clamp(16px, 2vw, 18.5px);
+  color: var(--ink-soft);
+  line-height: 1.72;
+  margin: 18px 0 0;
+  max-width: 60ch;
+}
+
+.hero {
+  display: grid;
+  gap: clamp(24px, 4vw, 48px);
+  align-items: center;
+  padding-bottom: clamp(30px, 4vw, 46px);
+}
+@media (min-width: 860px) {
+  .hero { grid-template-columns: minmax(0,1fr) 340px; }
+}
+
+.plate {
+  border: 1px solid var(--rule);
+  background: var(--paper);
+  border-radius: 2px;
+  padding: 14px 14px 10px;
+}
+.plate svg { display: block; width: 100%; height: auto; }
+.plate figcaption {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  line-height: 1.6;
+  color: var(--ink-faint);
+  border-top: 1px solid var(--rule-soft);
+  margin-top: 10px;
+  padding-top: 8px;
+}
+
+.meta-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 26px;
+  border-top: 1px solid var(--rule);
+  padding: 12px 0 16px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-faint);
+  letter-spacing: .04em;
+}
+.meta-strip b { color: var(--ink-soft); font-weight: 500; }
+
+/* ── 章节 ──────────────────────────────────────────────────── */
+section { padding: clamp(40px, 5vw, 62px) 0 0; scroll-margin-top: 20px; }
+section + section { border-top: 1px solid var(--rule-soft); margin-top: clamp(38px, 5vw, 58px); }
+
+.sec-head { margin-bottom: 22px; }
+.sec-tag {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.sec-tag::after { content: ""; flex: 1; height: 1px; background: var(--rule); }
+
+h2 {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: clamp(23px, 3.4vw, 31px);
+  line-height: 1.28;
+  margin: 10px 0 0;
+  text-wrap: balance;
+}
+
+h3 {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 1.5;
+  margin: 34px 0 -6px;
+  color: var(--ink);
+  text-wrap: balance;
+}
+h3 .m { color: var(--brass); font-weight: 500; }
+
+p { margin: 15px 0; }
+p.lead { font-size: 17.5px; color: var(--ink-soft); }
+
+ul, ol { margin: 15px 0; padding-left: 1.35em; }
+li { margin: 7px 0; }
+li::marker { color: var(--ink-faint); }
+
+strong { font-weight: 600; }
+em { font-style: normal; color: var(--brass); font-weight: 600; }
+
+/* ── 表格 ──────────────────────────────────────────────────── */
+.scroller {
+  overflow-x: auto;
+  margin: 24px 0;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  background: var(--surface);
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 540px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+th, td { padding: 10px 14px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--rule-soft); }
+thead th {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  font-weight: 500;
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--rule);
+  white-space: nowrap;
+}
+tbody tr:last-child td { border-bottom: none; }
+td.num, th.num { font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+td.name { font-weight: 600; }
+.tcap {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  color: var(--ink-faint);
+  margin: -16px 0 24px;
+  line-height: 1.6;
+}
+
+/* ── 提示块 ────────────────────────────────────────────────── */
+.note {
+  border-left: 2px solid var(--brass);
+  background: var(--tint);
+  padding: 14px 18px;
+  margin: 24px 0;
+  border-radius: 0 3px 3px 0;
+}
+.note p { margin: 8px 0; font-size: 15.5px; }
+.note p:first-child { margin-top: 0; }
+.note p:last-child { margin-bottom: 0; }
+.note .lbl {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--brass);
+  display: block;
+  margin-bottom: 4px;
+}
+.note.trap { border-left-color: var(--bad); background: color-mix(in srgb, var(--bad) 8%, transparent); }
+.note.trap .lbl { color: var(--bad); }
+
+/* ── 卡片网格 ──────────────────────────────────────────────── */
+.cards { display: grid; gap: 14px; margin: 24px 0; }
+@media (min-width: 620px) { .cards.two { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 720px) { .cards.three { grid-template-columns: repeat(3, 1fr); } }
+.card {
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  border-radius: 2px;
+  padding: 16px 18px;
+}
+.card h4 {
+  margin: 0 0 6px;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: var(--sans);
+}
+.card p { margin: 6px 0 0; font-size: 14.5px; line-height: 1.65; color: var(--ink-soft); }
+.card .k {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  display: block;
+  margin-bottom: 7px;
+}
+
+/* ── 路线图 ────────────────────────────────────────────────── */
+.road { margin: 26px 0; display: flex; flex-direction: column; gap: 0; }
+.leg {
+  display: grid;
+  grid-template-columns: 46px minmax(0,1fr);
+  gap: 18px;
+  padding: 20px 0;
+  border-top: 1px solid var(--rule-soft);
+}
+.leg:first-child { border-top: 1px solid var(--rule); }
+.leg-n {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--brass);
+  font-variant-numeric: tabular-nums;
+  padding-top: 3px;
+  letter-spacing: .04em;
+}
+.leg h4 { margin: 0; font-size: 16.5px; font-weight: 600; }
+.leg .when {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-faint);
+  margin: 4px 0 0;
+  letter-spacing: .04em;
+}
+.leg p { margin: 10px 0 0; font-size: 15px; color: var(--ink-soft); }
+.leg .out {
+  margin-top: 10px;
+  font-size: 13.5px;
+  font-family: var(--mono);
+  color: var(--teal);
+  line-height: 1.6;
+}
+
+/* ── 判据清单 ──────────────────────────────────────────────── */
+.gate { margin: 24px 0; border: 1px solid var(--rule); border-radius: 2px; overflow: hidden; }
+.gate-row {
+  display: grid;
+  grid-template-columns: 30px minmax(0,1fr);
+  gap: 14px;
+  padding: 15px 18px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--rule-soft);
+}
+.gate-row:last-child { border-bottom: none; }
+.gate-row .q { font-family: var(--mono); color: var(--brass); font-size: 13px; padding-top: 2px; }
+.gate-row b { display: block; font-weight: 600; font-size: 15.5px; }
+.gate-row span { display: block; color: var(--ink-soft); font-size: 14.5px; margin-top: 4px; line-height: 1.65; }
+
+/* ── 资源清单 ──────────────────────────────────────────────── */
+.refs { margin: 22px 0; }
+.ref {
+  display: grid;
+  grid-template-columns: minmax(0,1fr);
+  gap: 2px;
+  padding: 13px 0;
+  border-top: 1px solid var(--rule-soft);
+}
+.ref:first-child { border-top: 1px solid var(--rule); }
+.ref .t { font-weight: 600; font-size: 15px; line-height: 1.5; }
+.ref .w { font-family: var(--mono); font-size: 11.5px; color: var(--ink-faint); }
+.ref .d { font-size: 14.5px; color: var(--ink-soft); line-height: 1.6; margin-top: 3px; }
+
+/* ── SVG 图版配色 ──────────────────────────────────────────── */
+.dg-bone   { fill: none; stroke: var(--ink-soft); stroke-width: 5; stroke-linecap: round; }
+.dg-palm   { fill: var(--tint); stroke: var(--ink-soft); stroke-width: 1.6; }
+.dg-joint  { fill: var(--paper); stroke: var(--brass); stroke-width: 2.4; }
+.dg-tip    { fill: var(--brass); stroke: none; }
+.dg-lead   { stroke: var(--rule); stroke-width: 1; fill: none; }
+.dg-lbl    { fill: var(--ink-faint); font-family: var(--mono); font-size: 11px; letter-spacing: .06em; }
+.dg-lbl-hi { fill: var(--brass); font-family: var(--mono); font-size: 11px; letter-spacing: .06em; }
+.dg-arc    { fill: none; stroke: var(--teal); stroke-width: 1.6; stroke-dasharray: 3 3; }
+
+/* ── 页脚 ──────────────────────────────────────────────────── */
+footer {
+  margin-top: clamp(50px, 7vw, 80px);
+  border-top: 1px solid var(--rule);
+  background: var(--surface);
+  padding: 30px 0 44px;
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+footer p { margin: 8px 0; max-width: 66ch; }
+footer .sig {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-faint);
+  letter-spacing: .06em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+html { scroll-behavior: smooth; }
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <div class="hero">
+      <div>
+        <div class="eyebrow">Dexterous Hands · 入门手册</div>
+        <h1>灵巧手入门全攻略</h1>
+        <p class="standfirst">
+          从"我想搞灵巧手"到"我知道该买什么、读什么、先做什么"。
+          这份东西的目标不是让你兴奋，是让你少花钱、少走弯路，
+          并且在花第一笔钱之前先想清楚三个问题。
+        </p>
+      </div>
+
+      <figure class="plate">
+        <svg viewBox="0 0 300 320" role="img" aria-label="手部关节命名示意图：拇指的 CMC、MCP、IP 关节，其余手指的 MCP、PIP、DIP 关节">
+          <!-- 掌 -->
+          <path class="dg-palm" d="M92 300 L92 208 Q92 196 104 194 L196 194 Q208 196 208 208 L208 300 Q208 312 196 312 L104 312 Q92 312 92 300 Z"/>
+
+          <!-- 食指 -->
+          <path class="dg-bone" d="M112 196 L112 142 L112 104 L112 78"/>
+          <!-- 中指 -->
+          <path class="dg-bone" d="M144 194 L144 130 L144 88 L144 60"/>
+          <!-- 无名指 -->
+          <path class="dg-bone" d="M175 194 L175 138 L175 98 L175 72"/>
+          <!-- 小指 -->
+          <path class="dg-bone" d="M203 200 L207 156 L209 124 L210 102"/>
+          <!-- 拇指 -->
+          <path class="dg-bone" d="M96 286 L62 248 L44 216 L34 196"/>
+
+          <!-- 指尖 -->
+          <circle class="dg-tip" cx="112" cy="78" r="4.5"/>
+          <circle class="dg-tip" cx="144" cy="60" r="4.5"/>
+          <circle class="dg-tip" cx="175" cy="72" r="4.5"/>
+          <circle class="dg-tip" cx="210" cy="102" r="4.5"/>
+          <circle class="dg-tip" cx="34"  cy="196" r="4.5"/>
+
+          <!-- 关节 -->
+          <circle class="dg-joint" cx="112" cy="104" r="5.6"/>
+          <circle class="dg-joint" cx="112" cy="142" r="5.6"/>
+          <circle class="dg-joint" cx="112" cy="196" r="6.4"/>
+          <circle class="dg-joint" cx="144" cy="88"  r="5.6"/>
+          <circle class="dg-joint" cx="144" cy="130" r="5.6"/>
+          <circle class="dg-joint" cx="144" cy="194" r="6.4"/>
+          <circle class="dg-joint" cx="175" cy="98"  r="5.6"/>
+          <circle class="dg-joint" cx="175" cy="138" r="5.6"/>
+          <circle class="dg-joint" cx="175" cy="194" r="6.4"/>
+          <circle class="dg-joint" cx="209" cy="124" r="5.2"/>
+          <circle class="dg-joint" cx="207" cy="156" r="5.2"/>
+          <circle class="dg-joint" cx="203" cy="200" r="6"/>
+          <circle class="dg-joint" cx="44"  cy="216" r="5.6"/>
+          <circle class="dg-joint" cx="62"  cy="248" r="5.6"/>
+          <circle class="dg-joint" cx="96"  cy="286" r="6.4"/>
+
+          <!-- 外展弧线 -->
+          <path class="dg-arc" d="M128 178 Q144 168 160 178"/>
+
+          <!-- 引线与标注 -->
+          <path class="dg-lead" d="M118 104 L246 104"/>
+          <text class="dg-lbl-hi" x="250" y="107">DIP</text>
+          <path class="dg-lead" d="M118 142 L246 142"/>
+          <text class="dg-lbl-hi" x="250" y="145">PIP</text>
+          <path class="dg-lead" d="M119 196 L246 196"/>
+          <text class="dg-lbl-hi" x="250" y="199">MCP</text>
+
+          <path class="dg-lead" d="M38 216 L16 216"/>
+          <text class="dg-lbl" x="4" y="206">IP</text>
+          <path class="dg-lead" d="M56 250 L22 262"/>
+          <text class="dg-lbl" x="2" y="276">MCP</text>
+          <path class="dg-lead" d="M96 293 L74 306"/>
+          <text class="dg-lbl" x="42" y="318">CMC</text>
+
+          <text class="dg-lbl" x="150" y="164" text-anchor="middle" fill="currentColor" style="fill: var(--teal)">外展</text>
+        </svg>
+        <figcaption>
+          图版一 · 关节命名。四指自掌侧起为 MCP → PIP → DIP，拇指为 CMC → MCP → IP。
+          MCP 同时能屈曲和左右外展，是两个自由度。整个领域的论文、SDK、URDF 都用这套词。
+        </figcaption>
+      </figure>
+    </div>
+
+    <div class="meta-strip">
+      <span><b>面向</b> 零基础入行者</span>
+      <span><b>行情</b> 2026 年 8 月</span>
+      <span><b>立场</b> 个人开发者 / 小团队</span>
+      <span><b>约</b> 25 分钟</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+<div class="shell">
+
+  <nav class="rail" aria-label="目录">
+    <div class="rail-title">目录</div>
+    <ol>
+      <li><a href="#s1"><span class="n">01</span><span>先劝退</span></a></li>
+      <li><a href="#s2"><span class="n">02</span><span>难在哪</span></a></li>
+      <li><a href="#s3"><span class="n">03</span><span>术语速查</span></a></li>
+      <li><a href="#s4"><span class="n">04</span><span>三种驱动</span></a></li>
+      <li><a href="#s5"><span class="n">05</span><span>抓取分类学</span></a></li>
+      <li><a href="#s6"><span class="n">06</span><span>触觉</span></a></li>
+      <li><a href="#s7"><span class="n">07</span><span>硬件选型</span></a></li>
+      <li><a href="#s8"><span class="n">08</span><span>供应链</span></a></li>
+      <li><a href="#s9"><span class="n">09</span><span>仿真环境</span></a></li>
+      <li><a href="#s10"><span class="n">10</span><span>两条控制路线</span></a></li>
+      <li><a href="#s11"><span class="n">11</span><span>瓶颈是数据</span></a></li>
+      <li><a href="#s12"><span class="n">12</span><span>六个月路线</span></a></li>
+      <li><a href="#s13"><span class="n">13</span><span>实测踩坑</span></a></li>
+      <li><a href="#s14"><span class="n">14</span><span>该读什么</span></a></li>
+      <li><a href="#s15"><span class="n">15</span><span>何时买硬件</span></a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+  <!-- 01 ─────────────────────────────────────────────── -->
+  <section id="s1">
+    <div class="sec-head">
+      <div class="sec-tag">开篇</div>
+      <h2>先劝退：三句话</h2>
+    </div>
+
+    <p class="lead">
+      灵巧手是机器人里最容易让人兴奋、也最容易让人白花钱的方向。
+      在往下读之前，先接受这三件事。
+    </p>
+
+    <p>
+      <em>第一，你要解决的问题，大概率两指夹爪就够了。</em>
+      工业和物流里 95% 的抓取任务由夹爪完成，不是因为大家想象力不够，
+      是因为夹爪便宜、可靠、标定简单、坏了就换。灵巧手的价值只在夹爪明确做不到的地方：
+      手内操作（不放下物体就把它转个方向）、工具使用、需要适配大量未知形状的场景。
+      如果你说不出你的任务里夹爪具体卡在哪一步，那你现在还不需要灵巧手。
+    </p>
+
+    <p>
+      <em>第二，个人在"造手"这件事上没有机会。</em>
+      仅中国就有三十多家公司在做灵巧手本体，头部公司的估值和年产能都在快速上量。
+      硬件本身正在变成供应链生意——比谁的谐波减速器便宜、谁的产线良率高。
+      个人和小团队能赢的位置不在本体，在「手 + 具体场景 + 数据闭环」，
+      或者上游某个单点传感器。
+    </p>
+
+    <p>
+      <em>第三，最贵的从来不是手，是数据。</em>
+      一只入门手两百美金，采一万条有用的操作数据可能要几十万。
+      这个比例关系一旦看懂，你对整个领域的判断会完全不同——
+      也会明白为什么这份攻略后面花那么大篇幅讲遥操作和数据。
+    </p>
+
+    <div class="note">
+      <span class="lbl">那什么人该继续读</span>
+      <p>
+        想验证一个具体场景值不值得用灵巧手的产品/创业者；
+        想补上机器人操作这块知识的软件工程师；
+        以及单纯想动手玩、但不想第一步就买错东西的人。
+        这三类人往下读都有用。
+      </p>
+    </div>
+  </section>
+
+  <!-- 02 ─────────────────────────────────────────────── -->
+  <section id="s2">
+    <div class="sec-head">
+      <div class="sec-tag">基础</div>
+      <h2>为什么灵巧手比夹爪难一个数量级</h2>
+    </div>
+
+    <p>
+      一个两指夹爪只有一个自由度：开、合。控制它就是一个标量。
+      一只常见的灵巧手有 16 个自由度，人手有 27 个左右。
+      但难度的跳变不只是"维度从 1 变成 16"，而是下面四件事同时发生。
+    </p>
+
+    <h3>接触是不连续的</h3>
+    <p>
+      夹爪只有两个接触面，接触状态基本只有"碰到/没碰到"。
+      灵巧手有十几个可能的接触点，每个点随时会建立或断开。
+      整个系统的动力学方程在每次接触变化时都会跳变——这叫
+      <strong>混合动力学</strong>（hybrid dynamics），对优化和学习都极不友好，
+      梯度在接触切换处是不存在的。
+    </p>
+
+    <h3>手内操作要求"可控地失稳"</h3>
+    <p>
+      抓稳是入门题。真正区分灵巧手和夹爪的任务叫
+      <strong>手内重定向</strong>（in-hand reorientation）：
+      不借助桌面、不放下物体，只靠手指把它在掌心转到指定朝向。
+      这件事的本质是<em>反复地、有控制地放开又抓住</em>——
+      你必须让物体短暂失去稳定支撑，让它滚一点，再接住。
+      任何以"保持抓稳"为目标的控制器都做不到这个。
+      这也是为什么这个任务几乎全部是用强化学习做的。
+    </p>
+
+    <h3>手指之间会互相打架</h3>
+    <p>
+      16 个关节不是独立的。手指会自碰撞，会互相挡路，
+      会在你以为它能到的位置被另一根手指顶住。
+      这件事在纸上完全看不出来，在仿真里跑一次就会撞上（见第 13 节的实测）。
+    </p>
+
+    <h3>感知比动作更缺</h3>
+    <p>
+      人手上有大约一万七千个机械感受器。
+      现在绝大多数商用灵巧手的反馈只有电机的位置和电流。
+      "我到底有没有抓住""物体在不在滑"这类问题，
+      对人是本能，对机器人目前基本靠猜。触觉是这个领域最大的缺口，见第 6 节。
+    </p>
+  </section>
+
+  <!-- 03 ─────────────────────────────────────────────── -->
+  <section id="s3">
+    <div class="sec-head">
+      <div class="sec-tag">术语</div>
+      <h2>看论文和 SDK 之前，先认这些词</h2>
+    </div>
+
+    <p>
+      这个领域的词汇直接从解剖学借来。开头那张图版是最常用的一组，
+      下面这些是读文档时会被卡住的。
+    </p>
+
+    <div class="scroller">
+      <table>
+        <thead>
+          <tr><th>词</th><th>意思</th><th>为什么你会碰到它</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name">DoF<br><span class="m">自由度</span></td>
+            <td>系统能独立运动的维度数</td>
+            <td>但要分清 DoF 和<strong>驱动数</strong>：很多手 20 个 DoF 只有 12 个电机</td>
+          </tr>
+          <tr>
+            <td class="name">欠驱动<br><span class="m">underactuated</span></td>
+            <td>驱动器少于自由度，靠机械耦合（弹簧、连杆）让剩下的关节被动跟随</td>
+            <td>便宜手的通行做法。好处是抓不规则物体会自适应包裹，坏处是你无法精确指定每个指节的角度</td>
+          </tr>
+          <tr>
+            <td class="name">对指<br><span class="m">opposition</span></td>
+            <td>拇指能不能真正与其他手指指腹相对</td>
+            <td><strong>选手时的第一判据。</strong>没有真对指的"手"只是个多指夹爪，做不了精细捏取</td>
+          </tr>
+          <tr>
+            <td class="name">力封闭 / 形封闭<br><span class="m">force / form closure</span></td>
+            <td>形封闭＝纯靠几何包住，不依赖摩擦；力封闭＝靠摩擦力也能锁住</td>
+            <td>抓取质量的经典判据，几乎所有抓取规划论文的基础</td>
+          </tr>
+          <tr>
+            <td class="name">柔顺控制<br><span class="m">compliance</span></td>
+            <td>让手在受力时"让一让"，而不是硬顶</td>
+            <td>接触任务的安全底线。分主动（靠控制算法）和被动（靠机械弹性）</td>
+          </tr>
+          <tr>
+            <td class="name">回差<br><span class="m">backlash</span></td>
+            <td>传动机构里的空程；反向时先空转一点才带动</td>
+            <td>腱绳和齿轮手的主要精度杀手，也是 sim2real 差距的大头</td>
+          </tr>
+          <tr>
+            <td class="name">sim2real</td>
+            <td>把仿真里训好的策略搬到真机上</td>
+            <td>整个领域的核心难题。仿真里 100% 成功，真机 30% 是常态</td>
+          </tr>
+          <tr>
+            <td class="name">遥操作<br><span class="m">teleoperation</span></td>
+            <td>人实时操控机器人，同时录下轨迹当训练数据</td>
+            <td>目前采集真机操作数据的主流手段，见第 10、11 节</td>
+          </tr>
+          <tr>
+            <td class="name">重定向<br><span class="m">retargeting</span></td>
+            <td>把人手的关节角映射到结构完全不同的机器手上</td>
+            <td>遥操作绕不开的一步。人手 27 DoF，机器手 16 DoF，还差一根手指——这个映射本身就是研究课题</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 04 ─────────────────────────────────────────────── -->
+  <section id="s4">
+    <div class="sec-head">
+      <div class="sec-tag">机构</div>
+      <h2>三种驱动方式，决定了这只手的全部性格</h2>
+    </div>
+
+    <p>
+      拿到一只手的参数表，先看它怎么驱动。这一条决定了它的成本、
+      带宽、维护频率，以及你能不能做力控。
+    </p>
+
+    <div class="scroller">
+      <table>
+        <thead>
+          <tr>
+            <th>方案</th><th>怎么工作</th><th class="num">典型</th><th>优</th><th>劣</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name">腱绳驱动<br><span class="m">tendon</span></td>
+            <td>电机在手掌或前臂，靠钢丝/线拉动指节，模仿肌腱</td>
+            <td class="num">Shadow Hand<br>ORCA Hand</td>
+            <td>手指可以做得很细、很轻；惯量小；最接近人手</td>
+            <td>摩擦和回差大；<strong>绳会磨损，要定期换</strong>；力控难做准</td>
+          </tr>
+          <tr>
+            <td class="name">连杆驱动<br><span class="m">linkage</span></td>
+            <td>电机通过刚性连杆推动指节，常配欠驱动</td>
+            <td class="num">因时 RH56<br>多数工业手</td>
+            <td>刚性好、寿命长、便宜、几乎免维护</td>
+            <td>自由度受限；运动轨迹被机构写死；难做真正的手内操作</td>
+          </tr>
+          <tr>
+            <td class="name">直驱 / 关节内置<br><span class="m">direct drive</span></td>
+            <td>每个关节自己带一个小舵机或电机</td>
+            <td class="num">LEAP Hand<br>Allegro Hand</td>
+            <td>控制最直接，每个关节能独立读位置/电流；<strong>最适合做研究和 RL</strong></td>
+            <td>手指粗（电机塞在里面）；连续工作会发热掉扭矩；成本随 DoF 线性涨</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tcap">注：真实产品常是混合方案，比如掌内直驱 + 指端腱绳。</p>
+
+    <div class="note">
+      <span class="lbl">给入行者的建议</span>
+      <p>
+        <strong>第一只手选直驱。</strong>不是因为它性能最好，
+        是因为它的控制模型最干净——你下发一个关节角，它就去那个角，
+        中间没有腱绳的非线性摩擦替你捣乱。
+        你要学的是控制和策略，不是先跟机构的病打三个月交道。
+      </p>
+    </div>
+  </section>
+
+  <!-- 05 ─────────────────────────────────────────────── -->
+  <section id="s5">
+    <div class="sec-head">
+      <div class="sec-tag">理论</div>
+      <h2>抓取分类学：先知道人手到底有几种抓法</h2>
+    </div>
+
+    <p>
+      这是入行者最容易跳过、但回报最高的一块理论。
+      在设计任何手或任何策略之前，你得先知道"抓"这个动作一共有多少种。
+    </p>
+
+    <p>
+      最早的划分来自 <strong>Napier（1956）</strong>：
+      <em>力量抓握</em>（power grasp，整个手掌包住，追求稳和力，比如握锤子）
+      和 <em>精确抓握</em>（precision grasp，只用指尖，追求灵活和定位，比如捏针）。
+      这个二分法到今天仍然是所有讨论的骨架。
+    </p>
+
+    <p>
+      工程上更常引用的是 <strong>Cutkosky（1989）</strong>的 16 类分类树，
+      它是从观察机械师加工零件时的手部动作总结出来的，
+      直接把"任务需求"和"手的形态"挂钩。
+    </p>
+
+    <p>
+      目前最完整的是 <strong>Feix 等人的 GRASP Taxonomy（2016）</strong>，
+      归纳出 <em>33 种</em>人类抓取类型，按三个维度组织：
+      力量/中间/精确、拇指的位置、以及虚拟手指的数量。
+      它是后来几乎所有抓取数据集的标注体系。
+    </p>
+
+    <div class="note">
+      <span class="lbl">为什么这对你有用</span>
+      <p>
+        拿这 33 类去对照你的实际场景，你通常会发现：
+        <strong>你的任务只用到其中三到五类。</strong>
+        这个发现会立刻改变你的选型——
+        如果你只需要「三指精确捏取 + 侧捏」，你根本不需要五指二十自由度，
+        一只四指手甚至一只好的三指手就够了，成本差一个数量级。
+      </p>
+      <p>
+        这是从"我想要一只很厉害的手"转向"我需要一只刚好够用的手"的关键一步。
+      </p>
+    </div>
+  </section>
+
+  <!-- 06 ─────────────────────────────────────────────── -->
+  <section id="s6">
+    <div class="sec-head">
+      <div class="sec-tag">感知</div>
+      <h2>触觉：这个领域最大的缺口</h2>
+    </div>
+
+    <p>
+      如果你想找一个"还没被做完"的切入点，触觉是最值得看的一块。
+      现状是：视觉方案已经很成熟，本体（电机位置/电流）反馈是标配，
+      而<strong>指尖到底感受到什么，绝大多数手是不知道的</strong>。
+    </p>
+
+    <div class="cards two">
+      <div class="card">
+        <span class="k">视触觉</span>
+        <h4>GelSight / DIGIT 一路</h4>
+        <p>
+          指尖里塞一个小摄像头，拍一层弹性胶垫的形变。
+          分辨率极高，能看清物体表面纹理甚至螺纹。
+          代价是体积大、有延迟、胶垫会磨损老化。
+          DIGIT 是开源的，自制物料成本约 300 美金。
+        </p>
+      </div>
+      <div class="card">
+        <span class="k">电子皮肤</span>
+        <h4>阵列式压感</h4>
+        <p>
+          压阻/电容阵列铺在指腹上，直接读压力分布。
+          薄、快、耐用，但分辨率远低于视触觉，
+          且容易温漂、需要频繁标定。
+          国内 Paxini、汉威等都有成品模组。
+        </p>
+      </div>
+      <div class="card">
+        <span class="k">力矩感知</span>
+        <h4>关节电流估计</h4>
+        <p>
+          不加任何传感器，直接用电机电流反推关节力矩。
+          零成本，是入门手唯一可用的"触觉"。
+          精度很差（摩擦和减速比会吃掉大部分信号），
+          但足够做"碰到了没有"这种二值判断。
+        </p>
+      </div>
+      <div class="card">
+        <span class="k">滑觉</span>
+        <h4>振动 / 高频信号</h4>
+        <p>
+          物体开始打滑时会产生特定频段的微振动。
+          这是人类调节握力的主要依据，
+          机器人这块目前还很薄弱，也因此有机会。
+        </p>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="lbl">入行者的正确顺序</span>
+      <p>
+        <strong>第一阶段不要碰触觉。</strong>
+        先用纯位置控制 + 视觉把流程跑通，
+        等你明确知道"就是因为不知道有没有滑，所以我这个任务做不了"的时候，
+        再投触觉。否则你会在标定和数据对齐上耗掉所有时间。
+      </p>
+    </div>
+  </section>
+
+  <!-- 07 ─────────────────────────────────────────────── -->
+  <section id="s7">
+    <div class="sec-head">
+      <div class="sec-tag">选型</div>
+      <h2>硬件：按预算分四档</h2>
+    </div>
+
+    <p>
+      下面这张表是这份攻略里最实用的一页。价格是 2026 年 8 月前后的行情，
+      <strong>这个领域降价很快，看到时请重新核价。</strong>
+    </p>
+
+    <div class="scroller">
+      <table>
+        <thead>
+          <tr>
+            <th>型号</th><th class="num">自由度</th><th class="num">价位</th><th>驱动</th><th>适合谁</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name">LEAP Hand v2<br><span class="m">CMU · 开源</span></td>
+            <td class="num">8</td>
+            <td class="num">$200<br><span class="m">整机 ~$500</span></td>
+            <td>直驱 + 软硬混合</td>
+            <td><strong>绝大多数人的第一只手。</strong>3D 打印件自己装，约两小时。价值不在性能，在于你敢往死里试</td>
+          </tr>
+          <tr>
+            <td class="name">Ruka v2<br><span class="m">开源</span></td>
+            <td class="num">11</td>
+            <td class="num">&lt;$1,300</td>
+            <td>腱绳</td>
+            <td>想要拟人外形和更多自由度，又不想上两千刀的</td>
+          </tr>
+          <tr>
+            <td class="name">LEAP Hand v1<br><span class="m">CMU · 开源</span></td>
+            <td class="num">16</td>
+            <td class="num">~$2,000</td>
+            <td>直驱（Dynamixel）</td>
+            <td><strong>想复现论文就买这只。</strong>sim2real 研究的最大公约数，社区代码最多</td>
+          </tr>
+          <tr>
+            <td class="name">灵心巧手 Linker O6<br><span class="m">国产成品</span></td>
+            <td class="num">6</td>
+            <td class="num">¥3,999<br><span class="m">标准版 ¥6,666</span></td>
+            <td>连杆 / 混合</td>
+            <td>不想装配、要开箱即用 SDK、要做演示的。卖相好</td>
+          </tr>
+          <tr>
+            <td class="name">ORCA Hand<br><span class="m">ETH · 开源</span></td>
+            <td class="num">9 – 17</td>
+            <td class="num">$1,500 – $6,100</td>
+            <td>腱绳</td>
+            <td>要高自由度 + 可选五指触觉版；学术味最重的开源方案</td>
+          </tr>
+          <tr>
+            <td class="name">因时 / 傲意等<br><span class="m">国产工业向</span></td>
+            <td class="num">6 – 12</td>
+            <td class="num">¥5k – ¥30k</td>
+            <td>连杆欠驱动</td>
+            <td>要装到人形机器人上做实际作业、看重寿命和免维护的</td>
+          </tr>
+          <tr>
+            <td class="name">Allegro Hand<br><span class="m">Wonik</span></td>
+            <td class="num">16</td>
+            <td class="num">~$15,000</td>
+            <td>直驱</td>
+            <td>实验室标配，论文里出现频率极高。个人不划算</td>
+          </tr>
+          <tr>
+            <td class="name">Shadow Hand</td>
+            <td class="num">24</td>
+            <td class="num">$100,000+</td>
+            <td>腱绳（前臂电机）</td>
+            <td>行业标杆，OpenAI 魔方用的就是它。了解一下即可</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note trap">
+      <span class="lbl">低价手的三个通病</span>
+      <p>
+        这三条几乎所有两千美金以下的手都有，买之前先接受：
+      </p>
+      <p>
+        <strong>一、连续抓握十几分钟就发热掉扭矩。</strong>
+        小舵机没有散热设计，热了之后力矩明显下降，你的策略会莫名其妙开始失败。
+      </p>
+      <p>
+        <strong>二、腱绳几百次循环就要换。</strong>
+        腱绳方案的耗材属性比你预期的强，把换绳算进你的实验节奏里。
+      </p>
+      <p>
+        <strong>三、零位每次开机都要重标。</strong>
+        没有绝对编码器的手，上电后不知道自己在哪。
+        这件事会毁掉你所有"昨天跑通的脚本今天直接用"的幻想。
+      </p>
+    </div>
+  </section>
+
+  <!-- 08 ─────────────────────────────────────────────── -->
+  <section id="s8">
+    <div class="sec-head">
+      <div class="sec-tag">产业</div>
+      <h2>供应链：钱在上游，风险在下游</h2>
+    </div>
+
+    <p class="lead">
+      上一节讲的是买哪只手。这一节讲这只手是怎么来的、卖给谁——
+      如果你是带着创业或投资意图进来的，这一节比选型表更重要。
+    </p>
+
+    <p>
+      灵巧手是一个典型的<strong>「中间薄、两头厚」</strong>的行业：
+      做本体（中游）的公司最多、最卷、毛利最低；
+      真正的利润集中在上游几个卡脖子的零部件；
+      而下游的需求结构目前非常不健康——买家主要是实验室和演示项目，
+      不是真在干活的产线。
+    </p>
+
+    <h3>上游：零部件，毛利在这里</h3>
+
+    <div class="scroller">
+      <table>
+        <thead>
+          <tr><th>环节</th><th>是什么</th><th class="num">占成本</th><th>状况</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name">微型驱动<br><span class="m">电机 + 驱动器</span></td>
+            <td>空心杯电机、无框力矩电机、微型伺服模组。一只 16 自由度的手就要 16 套</td>
+            <td class="num">最大头</td>
+            <td>数量乘以自由度，直接决定整手成本。国产替代进展较快，是价格下降的主要来源</td>
+          </tr>
+          <tr>
+            <td class="name">减速与传动</td>
+            <td>谐波减速器、行星减速器、微型丝杠、腱绳（多用超高分子量聚乙烯纤维）</td>
+            <td class="num">高</td>
+            <td><strong>最典型的卡脖子环节。</strong>谐波减速器长期由少数几家把持，国产厂商近年在快速切入</td>
+          </tr>
+          <tr>
+            <td class="name">编码与位置反馈</td>
+            <td>磁编码器、绝对值编码器</td>
+            <td class="num">中</td>
+            <td>决定"上电知不知道自己在哪"。低价手省掉绝对值编码器，就是第 7 节说的每次要重标零位</td>
+          </tr>
+          <tr>
+            <td class="name">触觉与力感知</td>
+            <td>视触觉模组、压感阵列、六维力传感器</td>
+            <td class="num">可选但贵</td>
+            <td><strong>技术路线还没收敛，因此是最有机会的上游位置</strong>（见第 6 节）</td>
+          </tr>
+          <tr>
+            <td class="name">结构与材料</td>
+            <td>尼龙粉末烧结件、金属 CNC、TPU 软指腹、微型轴承</td>
+            <td class="num">低</td>
+            <td>不构成壁垒。3D 打印让小批量试制成本极低，这也是开源手能存在的原因</td>
+          </tr>
+          <tr>
+            <td class="name">控制与通信</td>
+            <td>驱动一体化控制板、CAN / EtherCAT 总线</td>
+            <td class="num">低</td>
+            <td>技术不难但影响体验：总线带宽决定你能跑多高的控制频率</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>中游：本体，最卷的一层</h3>
+
+    <div class="cards three">
+      <div class="card">
+        <span class="k">国产成品</span>
+        <h4>灵心巧手 · 因时 · 傲意 · 兆威等</h4>
+        <p>
+          三十多家在做，价格战已经开打。
+          优势是供应链在身边、迭代快、价格每年往下走。
+          共同问题是<strong>下游真实订单不足</strong>，出货很依赖科研和样机。
+        </p>
+      </div>
+      <div class="card">
+        <span class="k">海外商用</span>
+        <h4>Shadow · Wonik · Schunk</h4>
+        <p>
+          单价高、性能标杆、几乎全部卖给实验室。
+          它们定义了这个领域的性能上限，
+          但商业模式基本是小批量高毛利，不是量产逻辑。
+        </p>
+      </div>
+      <div class="card">
+        <span class="k">开源</span>
+        <h4>LEAP · ORCA · Ruka</h4>
+        <p>
+          高校主导，图纸和代码公开。
+          <strong>正在把入门门槛按到几百美金</strong>，
+          也在持续挤压中低端商用手的空间。对入行者是最大的红利。
+        </p>
+      </div>
+    </div>
+
+    <h3>下游：谁在买，以及买来干嘛</h3>
+
+    <p>
+      这是整条链上最需要冷静看的一段。按<em>需求的真实程度</em>从高到低排：
+    </p>
+
+    <div class="scroller">
+      <table>
+        <thead>
+          <tr><th>下游</th><th>需求真实度</th><th>说明</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name">假肢 / 康复医疗</td>
+            <td><strong style="color:var(--good)">已验证</strong></td>
+            <td><strong>唯一已被规模化付费验证的场景。</strong>用户为功能付费的意愿明确，有医保和保险路径。国内几家做手的公司都是从这块起家的。要求是轻、可靠、能长时间戴</td>
+          </tr>
+          <tr>
+            <td class="name">科研 / 高校实验室</td>
+            <td><strong style="color:var(--good)">真实但小</strong></td>
+            <td>当前出货量的主要去处。付费能力稳定，但总盘子有限，且被开源方案持续侵蚀</td>
+          </tr>
+          <tr>
+            <td class="name">工业柔性抓取 / 3C 装配</td>
+            <td><strong style="color:var(--warn)">有条件</strong></td>
+            <td>需求是真的，但和夹爪/专机直接竞争。只有在「品类极多、换线极频繁」的场景才算得过账</td>
+          </tr>
+          <tr>
+            <td class="name">特种作业 / 遥操作</td>
+            <td><strong style="color:var(--warn)">窄但硬</strong></td>
+            <td>核工业、排爆、深海。对价格不敏感、对可靠性极端敏感。量小、单价高、认证周期长</td>
+          </tr>
+          <tr>
+            <td class="name">人形机器人整机</td>
+            <td><strong style="color:var(--bad)">想象空间最大，也最不确定</strong></td>
+            <td><strong>所有产能规划都押在这里。</strong>但人形目前绝大多数出货是研发样机和演示，不是在干活。如果人形放缓，灵巧手的需求预测会直接塌掉一半</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note trap">
+      <span class="lbl">看这个行业时最该警惕的一件事</span>
+      <p>
+        产能规划和融资叙事都建立在"人形机器人放量"这一个假设上，
+        而这个假设目前<strong>还没有被真实订单验证过</strong>。
+        中游本体厂商喊出的年产能数字，
+        对应的下游客户名单里往往是同样还在等待验证的人形公司——
+        <strong>这是一条自我循环的需求链。</strong>
+      </p>
+      <p>
+        这不代表方向错，而是说：判断一家灵巧手公司时，
+        要问的不是"你能做多少只"，是"谁买走了，拿去干了什么活"。
+      </p>
+    </div>
+
+    <h3>给不同身份的人的结论</h3>
+
+    <div class="cards two">
+      <div class="card">
+        <span class="k">如果你想创业</span>
+        <h4>别做本体</h4>
+        <p>
+          中游已经是红海且在打价格战。
+          能站住的位置有两个：
+          <strong>上游某个单点传感器</strong>（触觉路线未收敛，是真空档），
+          或者<strong>下游某个具体场景的完整闭环</strong>——
+          手 + 场景 + 数据，卖的是解决方案不是零件。
+        </p>
+      </div>
+      <div class="card">
+        <span class="k">如果你想投资 / 判断</span>
+        <h4>盯上游和真实订单</h4>
+        <p>
+          上游卡脖子环节（减速器、微型驱动、编码器）的确定性远高于本体。
+          看本体公司时，把"出货量"拆成
+          <em>科研 / 演示样机 / 真实作业</em>三档来问，
+          第三档的数字才是这家公司的真实体温。
+        </p>
+      </div>
+    </div>
+
+    <p class="tcap">
+      本节为行业结构判断，不含具体财务数据；公司名单为举例，非推荐，也非穷举。
+    </p>
+  </section>
+
+  <!-- 09 ─────────────────────────────────────────────── -->
+  <section id="s9">
+    <div class="sec-head">
+      <div class="sec-tag">仿真</div>
+      <h2>仿真环境：先在这里花掉前三个月</h2>
+    </div>
+
+    <p class="lead">
+      买硬件之前先仿真，这不是省钱建议，是效率建议。
+      仿真里你一小时能跑几百次实验，真机上一小时能跑二十次，还得盯着别撞坏。
+    </p>
+
+    <div class="scroller">
+      <table>
+        <thead>
+          <tr><th>工具</th><th>定位</th><th>要不要装</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name">MuJoCo</td>
+            <td>物理引擎。接触求解快且稳，是操作类研究的事实标准</td>
+            <td><strong>必装，从这里开始。</strong>纯 CPU 也能跑，笔记本足够</td>
+          </tr>
+          <tr>
+            <td class="name">mujoco_menagerie</td>
+            <td>DeepMind 维护的高质量模型库，LEAP / Shadow / Allegro 都在里面</td>
+            <td><strong>必装。</strong>建议稀疏 checkout，整个仓库好几个 G</td>
+          </tr>
+          <tr>
+            <td class="name">MJX</td>
+            <td>MuJoCo 的 JAX 版，能在 GPU 上并行几千个环境</td>
+            <td>上 RL 时才需要。<strong>Mac 上没有 CUDA，到这一步租云主机</strong></td>
+          </tr>
+          <tr>
+            <td class="name">mujoco_playground</td>
+            <td>DeepMind 出的训练环境集，自带 <code>LeapCubeReorient</code> 手内旋转任务</td>
+            <td>做第二阶段（手内操作）时直接用，省掉自己搭环境</td>
+          </tr>
+          <tr>
+            <td class="name">ManiSkill / Isaac Lab</td>
+            <td>更大更全的操作基准，含大量物体资产和任务</td>
+            <td>要跑标准 benchmark 或做视觉输入时再考虑。都要 GPU</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>仿真第一天就要建立的两个习惯</h3>
+
+    <p>
+      <strong>一、任何实验都要重复多次并报区间。</strong>
+      接触力学对毫米级差异是混沌的——同样的初始条件加一点微扰动，
+      抓握强度可能差十倍以上。只跑一次得出的结论全是噪声。
+    </p>
+
+    <p>
+      <strong>二、每次搭好场景先查初始穿模。</strong>
+      物体和手的几何体如果一开始就重叠，物理引擎会产生巨大的穿透回弹力，
+      你会看到"抓得非常稳"的假象。这是仿真里最常见、也最难自己发现的错误。
+    </p>
+  </section>
+
+  <!-- 09 ─────────────────────────────────────────────── -->
+  <section id="s10">
+    <div class="sec-head">
+      <div class="sec-tag">方法</div>
+      <h2>两条控制路线，选一条走到底</h2>
+    </div>
+
+    <p>
+      到了要让手真正干活的时候，路只有两条。它们对硬件、
+      对你的时间、对预算的要求完全不同，<strong>不要同时开两条线。</strong>
+    </p>
+
+    <div class="cards two">
+      <div class="card">
+        <span class="k">路线 A</span>
+        <h4>遥操作示教 + 模仿学习</h4>
+        <p>
+          人戴着手套或用视觉手势追踪操控机器手完成任务，
+          录几百上千条轨迹，然后训一个策略去模仿。
+        </p>
+        <p>
+          <strong>优点：</strong>见效快，几十条数据就能看到雏形；
+          不需要写奖励函数；学到的动作天然像人。
+        </p>
+        <p>
+          <strong>代价：</strong>你要建一套数据采集系统，
+          而且泛化能力受限于你采过的分布——没采过的情况基本不会做。
+        </p>
+      </div>
+      <div class="card">
+        <span class="k">路线 B</span>
+        <h4>仿真强化学习 + sim2real</h4>
+        <p>
+          在仿真里用大规模并行环境训练，
+          靠域随机化（randomize 摩擦、质量、延迟、视觉）让策略对真实世界的误差免疫，
+          再迁到真机。
+        </p>
+        <p>
+          <strong>优点：</strong>数据免费且无限；
+          能做出遥操作教不了的高动态动作（手内快速翻转）。
+        </p>
+        <p>
+          <strong>代价：</strong>要 GPU；奖励函数难设计；
+          sim2real 差距是个无底洞，尤其是接触和摩擦。
+        </p>
+      </div>
+    </div>
+
+    <h3>怎么选</h3>
+    <p>
+      判据其实很简单：<strong>看你的任务能不能写出清晰的成功判据。</strong>
+      "把方块转到指定朝向"能用角度误差量化，适合 RL。
+      "把这堆杂物收拾整齐"没法写成奖励函数，只能靠示教。
+    </p>
+    <p>
+      对绝大多数以产品落地为目标的人，<em>路线 A 更现实</em>。
+      RL 在论文里更耀眼，但它对工程基建的要求高得多，
+      而且训出来的策略往往只在训练时那个具体设置下有效。
+    </p>
+
+    <h3>遥操作要配什么</h3>
+    <div class="scroller">
+      <table>
+        <thead><tr><th>方案</th><th>怎么做</th><th>取舍</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="name">VR 手柄 / 手势追踪</td>
+            <td>Quest 3 等头显自带的手部追踪，把人手关节映射到机器手</td>
+            <td>最便宜（复用现成头显）；精度中等，遮挡时会丢；无力反馈</td>
+          </tr>
+          <tr>
+            <td class="name">动捕手套</td>
+            <td>Manus、Rokoko 等，直接读人手关节角</td>
+            <td>精度高、不怕遮挡；贵；每个人手型不同，要标定</td>
+          </tr>
+          <tr>
+            <td class="name">视觉重建</td>
+            <td>普通摄像头 + 手部姿态估计模型，从视频反推关节</td>
+            <td>零硬件成本，可以采「人在真实环境里做事」的数据；精度最差</td>
+          </tr>
+          <tr>
+            <td class="name">同构主从手</td>
+            <td>做一个和机器手结构一样的小型主手，人操作它</td>
+            <td>映射最准（不用重定向）；要额外做一套硬件</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tcap">
+      重定向（把人手映射到机器手）几乎总是比预期难：人手五指，多数机器手四指，
+      指节长度比例也不同。这一步的质量直接决定数据质量。
+    </p>
+  </section>
+
+  <!-- 10 ─────────────────────────────────────────────── -->
+  <section id="s11">
+    <div class="sec-head">
+      <div class="sec-tag">判断</div>
+      <h2>真正的瓶颈是数据，不是手</h2>
+    </div>
+
+    <p class="lead">
+      这一节是整份攻略里最重要的判断。如果你只记住一件事，记这个。
+    </p>
+
+    <p>
+      语言模型能起飞，是因为互联网上已经躺着几万亿 token 的免费文本。
+      视觉模型能起飞，是因为图片同样免费且海量。
+      <strong>机器人操作数据不存在这样的存量。</strong>
+      它必须被一小时一小时地造出来——需要真实的机器人、
+      真实的环境、真实的人在旁边操作，而且采一小时数据的下限就是一小时。
+    </p>
+
+    <p>
+      这带来几个直接后果，值得入行者早点知道：
+    </p>
+
+    <ul>
+      <li>
+        <strong>数据的成本远高于硬件。</strong>
+        手是一次性支出，数据是持续支出，且规模上去之后是数量级差异。
+      </li>
+      <li>
+        <strong>数据不通用。</strong>
+        在一只平行夹爪上采的数据，喂不进一只十六自由度的灵巧手——
+        动作空间根本不是一回事。这就是<em>跨本体迁移</em>问题，
+        目前是整个领域最关键的开放课题。
+      </li>
+      <li>
+        <strong>因此数据就是护城河</strong>，做机器人基础模型的公司都在自建采集，
+        不外包。这和当年大家乐意把图片标注外包出去是完全相反的局面。
+      </li>
+    </ul>
+
+    <div class="note">
+      <span class="lbl">给创业者的推论</span>
+      <p>
+        如果你在想"能不能做机器人数据领域的 Scale AI"，
+        注意上面第二、三条：<strong>采集这一环会被需要它的公司自己吃掉。</strong>
+        更可能成立的位置是采集的<em>上游和下游</em>——
+        遥操作硬件与工具链（卖铲子）、仿真资产、
+        以及第三方评测基准（现在没有人能可信地回答"我的模型比你强多少"）。
+      </p>
+      <p>
+        判断何时翻转，只需要盯一件事：<strong>跨本体迁移什么时候变成真的。</strong>
+        那一天到来，横向数据公司立刻成立。
+      </p>
+    </div>
+  </section>
+
+  <!-- 11 ─────────────────────────────────────────────── -->
+  <section id="s12">
+    <div class="sec-head">
+      <div class="sec-tag">路线</div>
+      <h2>六个月，从零到能做判断</h2>
+    </div>
+
+    <p>
+      下面这个顺序是有意设计的：<strong>每一阶段的产出都是下一阶段的输入，
+      而且每一阶段结束时你都可以选择停下</strong>——
+      如果结论是"我的场景不需要灵巧手"，那你在第二个月就省下了所有钱。
+    </p>
+
+    <div class="road">
+      <div class="leg">
+        <div class="leg-n">01</div>
+        <div>
+          <h4>装仿真，把一次抓取跑通</h4>
+          <p class="when">第 1–2 周 · 零成本</p>
+          <p>
+            装 MuJoCo 和模型库，加载一只手，让它抓起一个方块。
+            重点不是抓起来，是建立"改一个参数 → 看结果怎么变"的循环。
+          </p>
+          <p class="out">→ 产出：你知道摩擦、闭合幅度、落点各自影响多大</p>
+        </div>
+      </div>
+
+      <div class="leg">
+        <div class="leg-n">02</div>
+        <div>
+          <h4>做参数扫描，建立物理直觉</h4>
+          <p class="when">第 3–4 周 · 零成本</p>
+          <p>
+            批量扫形状、摩擦系数、手指闭合幅度、落点位置。
+            每组重复五次，报区间不报单点。
+            这一步会推翻你至少两三个想当然的假设。
+          </p>
+          <p class="out">→ 产出：一份自己的实验记录，以及对"抓稳"的真实理解</p>
+        </div>
+      </div>
+
+      <div class="leg">
+        <div class="leg-n">03</div>
+        <div>
+          <h4>读分类学，对照你的场景</h4>
+          <p class="when">第 5 周 · 零成本</p>
+          <p>
+            拿 Feix 的 33 类抓取，逐条对照你要做的任务，
+            圈出真正用得上的那几类。
+            <strong>这一步通常直接决定你需要几个自由度。</strong>
+          </p>
+          <p class="out">→ 产出：一份具体的自由度和形态需求，而不是"越多越好"</p>
+        </div>
+      </div>
+
+      <div class="leg">
+        <div class="leg-n">04</div>
+        <div>
+          <h4>换任务：手内重定向</h4>
+          <p class="when">第 2–3 月 · 可能要租 GPU</p>
+          <p>
+            用 <code>mujoco_playground</code> 的现成环境跑手内旋转。
+            你会第一次真切感到脚本控制的天花板在哪，
+            以及为什么这个领域离不开学习方法。
+          </p>
+          <p class="out">→ 产出：对 RL 训练成本和 sim2real 差距的第一手感受</p>
+        </div>
+      </div>
+
+      <div class="leg">
+        <div class="leg-n">05</div>
+        <div>
+          <h4>回答三个问题，然后买第一只手</h4>
+          <p class="when">第 4 月 · $200 起</p>
+          <p>
+            第 15 节那三个问题答得上来，就可以下单了。
+            第一只手的作用是让你撞上所有仿真里不存在的问题：
+            发热、标定漂移、通信延迟、装配公差。
+          </p>
+          <p class="out">→ 产出：一份 sim 与 real 的差异清单，这是最值钱的东西</p>
+        </div>
+      </div>
+
+      <div class="leg">
+        <div class="leg-n">06</div>
+        <div>
+          <h4>搭最小数据闭环</h4>
+          <p class="when">第 5–6 月</p>
+          <p>
+            用最便宜的遥操作方案（VR 手势追踪就行）采五十条你自己场景的数据，
+            训一个模仿学习策略跑起来。规模不重要，
+            <strong>闭环打通才重要</strong>。
+          </p>
+          <p class="out">→ 产出：你现在可以对这个方向做出有依据的判断了</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 ─────────────────────────────────────────────── -->
+  <section id="s13">
+    <div class="sec-head">
+      <div class="sec-tag">实测</div>
+      <h2>几个只有动手才会撞上的坑</h2>
+    </div>
+
+    <p>
+      下面这些不是从论文里抄的，是在 MuJoCo 里对着一只 16 自由度的
+      LEAP Hand 反复跑实验撞出来的。它们全都和直觉相反。
+    </p>
+
+    <h3>抓握主要靠几何包络，摩擦是二阶项</h3>
+    <p>
+      沿掌面法向往上拔的方向，把摩擦系数扫六十倍，抓握强度<strong>纹丝不动</strong>。
+      只有沿掌面横推时摩擦才起作用。
+      也就是说，"换个防滑材料"对提升抓取稳定性的帮助，
+      远小于"让手指多包过去一点"。
+    </p>
+
+    <h3>接触点数量和抓得牢几乎无关</h3>
+    <p>
+      直觉是接触点越多越稳。实测相关系数只有 <span class="m">+0.25</span>，
+      而法向力和抓握强度的相关系数是 <span class="m">+0.91</span>。
+      看接触点个数来判断抓得好不好，是错的。
+    </p>
+
+    <h3>落点比什么都敏感</h3>
+    <p>
+      同一个物体，在掌心的落点偏 2 厘米，抓握强度从 40 倍自重掉到 4 倍。
+      这解释了为什么真实系统里视觉定位精度那么关键——
+      它不是锦上添花，它就是主变量。
+    </p>
+
+    <div class="note trap">
+      <span class="lbl">最反直觉的一条</span>
+      <p>
+        <strong>开环下发一组关节角，手到不了那个位置。</strong>
+        残余误差约 6°，握拳姿势下到 14°。
+      </p>
+      <p>
+        第一反应是伺服太软，于是把位置环增益从 3 加到 120——
+        <strong>误差纹丝不动。</strong>
+        原因是手指之间<em>自碰撞</em>顶住了，这是几何约束，不是控制问题，
+        P 增益压不掉。
+      </p>
+      <p>
+        解法是迭代补偿：<code>指令 += 0.6 × (目标 − 实测)</code>，
+        反复几轮把指令抬上去。增益取 1.0 会来回震荡，0.6 收敛。
+      </p>
+      <p>
+        这条直接影响 sim2real 和遥操作轨迹回放——
+        <strong>你录下来的关节角，直接放给另一只手是到不了位的。</strong>
+      </p>
+    </div>
+
+    <h3>系统对毫米级差异是混沌的</h3>
+    <p>
+      完全相同的设置，加五次微小扰动，抓握强度落在 2.9 倍到 39.8 倍之间。
+      这意味着：任何单次实验结论都不可信；
+      上 RL 之后 reward 的方差主要来自物理本身，不是来自算法。
+      实验设计上从第一天就要多种子、报区间。
+    </p>
+  </section>
+
+  <!-- 13 ─────────────────────────────────────────────── -->
+  <section id="s14">
+    <div class="sec-head">
+      <div class="sec-tag">资源</div>
+      <h2>该读什么</h2>
+    </div>
+
+    <p>
+      按读的顺序排，不按重要性。前三篇是地基，后面按需要挑。
+    </p>
+
+    <div class="refs">
+      <div class="ref">
+        <div class="t">The GRASP Taxonomy of Human Grasp Types</div>
+        <div class="w">Feix et al. · IEEE THMS · 2016</div>
+        <div class="d">33 类人类抓取的完整归纳。读它是为了把"抓"这个模糊动词拆成可枚举的类型，从而知道自己的任务真正需要什么。</div>
+      </div>
+      <div class="ref">
+        <div class="t">Learning Dexterous In-Hand Manipulation</div>
+        <div class="w">OpenAI · 2018（及 2019 魔方续作）</div>
+        <div class="d">这个领域的分水岭。Shadow Hand 转方块，全靠仿真训练 + 域随机化迁到真机。读它是为了理解 sim2real 这条路的完整形状和它的代价。</div>
+      </div>
+      <div class="ref">
+        <div class="t">LEAP Hand: Low-Cost, Efficient, Anthropomorphic Hand</div>
+        <div class="w">Shaw, Bahl, Pathak · CMU · RSS 2023</div>
+        <div class="d">你很可能会买的那只手的原始论文。同时也是"低成本硬件也能做严肃研究"这个论点的代表作。</div>
+      </div>
+      <div class="ref">
+        <div class="t">Domain Randomization for Transferring Deep Neural Networks</div>
+        <div class="w">Tobin et al. · 2017</div>
+        <div class="d">sim2real 的核心技巧：与其把仿真做得更真，不如把它做得足够随机，逼策略学会对参数不敏感。思路极其简单，影响极大。</div>
+      </div>
+      <div class="ref">
+        <div class="t">Open X-Embodiment / RT-X</div>
+        <div class="w">多机构联合 · 2023</div>
+        <div class="d">把二十多个机构、几十种机器人的数据合并成一个数据集，验证跨本体训练是否有效。第 11 节说的"跨本体迁移"这件事的温度计，值得持续跟踪。</div>
+      </div>
+      <div class="ref">
+        <div class="t">UMI: Universal Manipulation Interface</div>
+        <div class="w">Chi, Song et al. · 2024</div>
+        <div class="d">用一个手持夹爪 + 摄像头在真实世界里采数据，绕开机器人本体。虽然做的是夹爪不是灵巧手，但它代表的思路——"在野采集打败实验室采集"——对灵巧手同样成立。</div>
+      </div>
+      <div class="ref">
+        <div class="t">DexCap / Open-TeleVision</div>
+        <div class="w">2024 前后</div>
+        <div class="d">两套有代表性的灵巧手遥操作数据采集方案。要走路线 A 的话，从这里抄架构。</div>
+      </div>
+      <div class="ref">
+        <div class="t">mujoco_menagerie · mujoco_playground</div>
+        <div class="w">Google DeepMind · 开源仓库</div>
+        <div class="d">不是论文但比多数论文有用。前者是高质量机器人模型，后者是现成的训练环境，包含手内重定向任务。</div>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="lbl">读法建议</span>
+      <p>
+        <strong>不要按顺序读完再动手。</strong>
+        正确的节奏是：读 Feix → 动手跑仿真两周 → 读 OpenAI 那篇 →
+        再动手。带着自己撞过的问题去读论文，吸收率完全不同。
+      </p>
+    </div>
+  </section>
+
+  <!-- 14 ─────────────────────────────────────────────── -->
+  <section id="s15">
+    <div class="sec-head">
+      <div class="sec-tag">决策</div>
+      <h2>什么时候该买第一只手</h2>
+    </div>
+
+    <p>
+      不是"等你准备好了"，而是"等你能回答下面三个问题"。
+      答不上来就说明你还不知道自己要验证什么，买了也只是摆着。
+    </p>
+
+    <div class="gate">
+      <div class="gate-row">
+        <div class="q">Q1</div>
+        <div>
+          <b>你要解决的问题，夹爪能不能做？</b>
+          <span>如果能，就别碰灵巧手。要具体到某一步：「夹爪抓起水杯没问题，但没法在不放下的情况下把杯口转向自己」——这才叫答上来了。</span>
+        </div>
+      </div>
+      <div class="gate-row">
+        <div class="q">Q2</div>
+        <div>
+          <b>你需要几个自由度？触觉是必需还是加分？</b>
+          <span>答案应该来自第 5 节那次分类学对照，而不是来自"多一点保险"。多两个自由度意味着多两个会发热、会漂移、会坏的东西。</span>
+        </div>
+      </div>
+      <div class="gate-row">
+        <div class="q">Q3</div>
+        <div>
+          <b>你走遥操作还是 RL？</b>
+          <span>这决定你除了手之外还要买什么。遥操作要配数采方案（头显或手套），RL 要配 GPU（本地或云）。两者的后续投入都比手本身贵。</span>
+        </div>
+      </div>
+    </div>
+
+    <p>
+      三个都答得上来，第一只手买
+      <a href="https://v2.leaphand.com/" target="_blank" rel="noopener">LEAP Hand v2</a>，
+      两百美金。它不是最好的手，
+      但它是<strong>唯一一只你敢拿去做破坏性实验的手</strong>——
+      而入行阶段真正稀缺的，就是这种敢试错的额度。
+    </p>
+
+    <div class="note">
+      <span class="lbl">最后一句</span>
+      <p>
+        这个领域现在的状态是：<strong>硬件在快速变便宜，方法还没收敛，数据是唯一的硬通货。</strong>
+        入行者最好的位置不是追最新的模型，
+        而是找到一个别人没有数据、而你能持续拿到数据的具体场景。
+        手只是那个场景的入口。
+      </p>
+    </div>
+  </section>
+
+  </main>
+</div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <p>
+      本文的选型价格为 2026 年 8 月前后行情，仅供参考，下单前请重新核价。
+      第 13 节的实测数据来自 MuJoCo 中对 LEAP Hand 模型的仿真实验，
+      是仿真结论，真机上的具体数字会不同，但趋势和量级可参考。
+    </p>
+    <p class="sig">灵巧手入门全攻略 · 面向零基础入行者 · 2026</p>
+  </div>
+</footer>
