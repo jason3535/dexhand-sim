@@ -160,6 +160,31 @@ h3.sub::before { content:""; display:inline-block; width:7px; height:7px; backgr
 html { scroll-behavior:smooth; }
 .section { scroll-margin-top:14px; }
 
+
+/* ---- 系列导航（三部曲） ---- */
+.series { border:2px solid var(--ink); background:var(--paper); margin-top:34px; }
+.series-head { display:flex; align-items:center; gap:10px; padding:12px 20px; background:var(--ink); color:#fff;
+  font-family:var(--mono); font-size:11px; letter-spacing:0.26em; }
+.series-head::before { content:""; width:8px; height:8px; border-radius:50%; background:var(--red); flex:none; }
+.series-grid { display:grid; grid-template-columns:repeat(3,1fr); }
+.series-grid a { display:block; padding:20px 22px 18px; text-decoration:none; color:var(--ink);
+  border-left:1px solid var(--line); transition:background .15s ease; position:relative; }
+.series-grid a:first-child { border-left:none; }
+.series-grid a:hover { background:var(--soft); }
+.series-grid .num { font-family:var(--mono); font-size:30px; font-weight:700; color:var(--red); display:block; line-height:1; }
+.series-grid .t { font-size:16.5px; font-weight:700; display:block; margin-top:10px; letter-spacing:-0.01em; }
+.series-grid .d { font-size:12.5px; color:var(--muted); display:block; margin-top:3px; }
+.series-grid a.cur { background:var(--ink); color:#fff; }
+.series-grid a.cur:hover { background:var(--ink); }
+.series-grid a.cur .d { color:#a8a8a8; }
+.series-grid a.cur::after { content:"正在读"; position:absolute; top:14px; right:14px;
+  font-family:var(--mono); font-size:10px; letter-spacing:0.18em; color:#fff; background:var(--red); padding:2px 8px; }
+@media (max-width:860px) {
+  .series-grid { grid-template-columns:1fr; }
+  .series-grid a { border-left:none; border-top:1px solid var(--line); }
+  .series-grid a:first-child { border-top:none; }
+}
+
 /* ---- 目录 ---- */
 .toc { border:1px solid var(--ink); background:var(--paper); margin-top:40px; }
 .toc-head { display:flex; align-items:center; gap:10px; padding:12px 18px; border-bottom:1px solid var(--ink);
@@ -210,12 +235,12 @@ html { scroll-behavior:smooth; }
     <div class="meta">13&nbsp;节&nbsp;&nbsp;/&nbsp;&nbsp;约&nbsp;25&nbsp;分钟&nbsp;&nbsp;/&nbsp;&nbsp;含竞品对比与供应链分析</div>
   </div>
 
-  <nav class="toc" aria-label="系列导航" style="margin-top:28px">
-    <div class="toc-head">SERIES&nbsp;·&nbsp;具身智能三部曲</div>
-    <div class="toc-grid" style="grid-template-columns:repeat(3,1fr)">
-      <a href="index.html" style="background:var(--soft);color:var(--red)"><span class="n">01/</span>灵巧手：入门全攻略（本篇）</a>
-      <a href="body.html"><span class="n">02/</span>人形本体：全景分析</a>
-      <a href="brain.html"><span class="n">03/</span>具身大脑：全景分析</a>
+  <nav class="series" aria-label="系列导航">
+    <div class="series-head">SERIES&nbsp;·&nbsp;具身智能三部曲</div>
+    <div class="series-grid">
+      <a href="index.html" class="cur"><span class="num">01</span><span class="t">灵巧手</span><span class="d">入门全攻略</span></a>
+      <a href="body.html"><span class="num">02</span><span class="t">人形本体</span><span class="d">全景分析</span></a>
+      <a href="brain.html"><span class="num">03</span><span class="t">具身大脑</span><span class="d">全景分析</span></a>
     </div>
   </nav>
 
@@ -1044,11 +1069,12 @@ html { scroll-behavior:smooth; }
     <p>硬件在快速变便宜，方法还没收敛，数据是唯一的硬通货。入行者最好的位置不是追最新的模型，而是找到一个别人没有数据、而你能持续拿到数据的具体场景——手只是那个场景的入口<span class="enddot"></span></p>
   </div>
 
-  <nav class="toc" aria-label="系列导航" style="margin-top:40px">
-    <div class="toc-head">CONTINUE&nbsp;·&nbsp;继续阅读</div>
-    <div class="toc-grid" style="grid-template-columns:repeat(2,1fr)">
-      <a href="body.html"><span class="n">02/&nbsp;→</span>人形本体：全景分析</a>
-      <a href="brain.html"><span class="n">03/&nbsp;→</span>具身大脑：全景分析</a>
+  <nav class="series" aria-label="系列导航">
+    <div class="series-head">SERIES&nbsp;·&nbsp;具身智能三部曲</div>
+    <div class="series-grid">
+      <a href="index.html" class="cur"><span class="num">01</span><span class="t">灵巧手</span><span class="d">入门全攻略</span></a>
+      <a href="body.html"><span class="num">02</span><span class="t">人形本体</span><span class="d">全景分析</span></a>
+      <a href="brain.html"><span class="num">03</span><span class="t">具身大脑</span><span class="d">全景分析</span></a>
     </div>
   </nav>
 
