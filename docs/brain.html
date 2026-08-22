@@ -218,17 +218,17 @@ html { scroll-behavior:smooth; }
 .lk-card:hover { transform:translateY(-3px); border-color:var(--red); color:var(--ink);
   box-shadow:7px 7px 0 var(--red-soft); }
 .lk-top { display:flex; align-items:center; justify-content:space-between; gap:10px; }
-.lk-kind { font-family:var(--mono); font-size:10px; letter-spacing:0.18em;
-  color:var(--red); background:var(--red-soft); padding:4px 9px; }
-.lk-go { font-family:var(--mono); font-size:16px; color:var(--faint);
+.lk-kind { font-family:var(--mono); font-size:11px; letter-spacing:0.14em;
+  color:var(--red); background:var(--red-soft); padding:4px 10px; }
+.lk-go { font-family:var(--mono); font-size:17px; line-height:1; color:var(--faint);
   transition:color .16s ease, transform .16s ease; }
 .lk-card:hover .lk-go { color:var(--red); transform:translate(3px,-3px); }
-.lk-name { font-size:18px; font-weight:700; letter-spacing:-0.01em; line-height:1.25; margin-top:3px; }
-.lk-view { font-family:var(--mono); font-size:11.5px; color:var(--red); letter-spacing:0.03em; }
-.lk-desc { font-size:12.5px; color:var(--muted); line-height:1.6; }
-.lk-foot { margin-top:auto; padding-top:12px; display:flex; align-items:baseline;
-  justify-content:space-between; gap:8px; font-family:var(--mono); font-size:10.5px; color:var(--faint); }
-.lk-stat { color:var(--ink); font-weight:700; font-size:12px; }
+.lk-name { font-size:17px; font-weight:700; letter-spacing:-0.01em; line-height:1.35; margin-top:4px; }
+.lk-view { font-family:var(--mono); font-size:13px; line-height:1.5; color:var(--red); }
+.lk-desc { font-size:13px; line-height:1.7; color:var(--muted); }
+.lk-foot { margin-top:auto; padding-top:13px; display:flex; align-items:baseline; flex-wrap:wrap;
+  justify-content:space-between; gap:4px 10px; font-family:var(--mono); font-size:11px; color:var(--faint); }
+.lk-stat { font-size:13px; font-weight:700; color:var(--ink); }
 
 #totop { position:fixed; right:22px; bottom:22px; z-index:20; display:none;
   font-family:var(--mono); font-size:11px; letter-spacing:0.18em; color:var(--ink);
@@ -245,7 +245,16 @@ html { scroll-behavior:smooth; }
   .vs-row { grid-template-columns:1fr 92px 1fr; }
   .plate-row { grid-template-columns:1fr; }
   .toc-grid { grid-template-columns:1fr 1fr; }
-  .lk-grid { grid-template-columns:1fr; }
+  .lk-grid { grid-template-columns:1fr; gap:12px; }
+  .lk-card { padding:18px 18px 15px; }
+}
+@media (max-width:640px) {
+  /* 窄屏横向溢出修复：以下都是被内容撑破页面的老问题 */
+  .topbar .rt-long { display:none; }        /* 前缀带 &nbsp; 无法折行，只留册数 */
+  .chip { white-space:normal; }             /* 长署名 chip 原本强制单行 */
+  .decision .d-body, .vs-cell { min-width:0; overflow-wrap:anywhere; }  /* grid 子项默认 min-width:auto 不收缩 */
+  .vs-row { grid-template-columns:1fr 64px 1fr; }
+  .vs-cell { padding:10px 11px; }
 }
 @media (prefers-reduced-motion:reduce) {
   html { scroll-behavior:auto; }
@@ -262,7 +271,7 @@ html { scroll-behavior:smooth; }
   <div class="topbar">
     <div class="dots"><i></i><i></i></div>
     <span>EMBODIED&nbsp;BRAIN</span>
-    <span class="rt">EMBODIED&nbsp;AI&nbsp;SERIES&nbsp;03/03</span>
+    <span class="rt"><span class="rt-long">EMBODIED&nbsp;AI&nbsp;SERIES&nbsp;</span>03/03</span>
   </div>
 
   <div class="hero">
