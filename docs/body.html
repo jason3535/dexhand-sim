@@ -205,6 +205,31 @@ html { scroll-behavior:smooth; }
 .toc-grid a .n { font-family:var(--mono); font-size:11px; color:var(--red); letter-spacing:0.1em; flex:none; }
 .toc-grid a:hover { background:var(--soft); color:var(--red); }
 
+/* ---- 延伸查阅卡片 ---- */
+.lk { margin-top:44px; }
+.lk-head { display:flex; align-items:center; gap:10px; margin-bottom:16px;
+  font-family:var(--mono); font-size:11px; letter-spacing:0.22em; color:var(--muted); }
+.lk-head::before { content:""; width:7px; height:7px; border-radius:50%; background:var(--red); flex:none; }
+.lk-head::after { content:""; flex:1; height:1px; background:var(--line); }
+.lk-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
+.lk-card { display:flex; flex-direction:column; gap:7px; padding:20px 22px 16px;
+  border:1px solid var(--ink); background:var(--paper); color:var(--ink); text-decoration:none;
+  transition:transform .16s ease, box-shadow .16s ease, border-color .16s ease; }
+.lk-card:hover { transform:translateY(-3px); border-color:var(--red); color:var(--ink);
+  box-shadow:7px 7px 0 var(--red-soft); }
+.lk-top { display:flex; align-items:center; justify-content:space-between; gap:10px; }
+.lk-kind { font-family:var(--mono); font-size:10px; letter-spacing:0.18em;
+  color:var(--red); background:var(--red-soft); padding:4px 9px; }
+.lk-go { font-family:var(--mono); font-size:16px; color:var(--faint);
+  transition:color .16s ease, transform .16s ease; }
+.lk-card:hover .lk-go { color:var(--red); transform:translate(3px,-3px); }
+.lk-name { font-size:18px; font-weight:700; letter-spacing:-0.01em; line-height:1.25; margin-top:3px; }
+.lk-view { font-family:var(--mono); font-size:11.5px; color:var(--red); letter-spacing:0.03em; }
+.lk-desc { font-size:12.5px; color:var(--muted); line-height:1.6; }
+.lk-foot { margin-top:auto; padding-top:12px; display:flex; align-items:baseline;
+  justify-content:space-between; gap:8px; font-family:var(--mono); font-size:10.5px; color:var(--faint); }
+.lk-stat { color:var(--ink); font-weight:700; font-size:12px; }
+
 #totop { position:fixed; right:22px; bottom:22px; z-index:20; display:none;
   font-family:var(--mono); font-size:11px; letter-spacing:0.18em; color:var(--ink);
   background:var(--paper); border:1px solid var(--ink); padding:9px 14px; text-decoration:none; }
@@ -220,11 +245,14 @@ html { scroll-behavior:smooth; }
   .vs-row { grid-template-columns:1fr 92px 1fr; }
   .plate-row { grid-template-columns:1fr; }
   .toc-grid { grid-template-columns:1fr 1fr; }
+  .lk-grid { grid-template-columns:1fr; }
 }
 @media (prefers-reduced-motion:reduce) {
   html { scroll-behavior:auto; }
   .reveal { opacity:1; transform:none; transition:none; }
   .card:hover { transform:none; }
+  .lk-card:hover { transform:none; }
+  .lk-card:hover .lk-go { transform:none; }
 }
 </style>
 </head>
@@ -555,13 +583,37 @@ html { scroll-behavior:smooth; }
     </div>
   </nav>
 
-  <nav class="toc" aria-label="延伸查阅" style="margin-top:22px">
-    <div class="toc-head">LOOKUP&nbsp;·&nbsp;文中人物、访谈与论文，可延伸查阅</div>
-    <div class="toc-grid" style="grid-template-columns:repeat(2,1fr)">
-      <a href="https://hardware.jasonlin.tech/?filter=robotics" target="_blank" rel="noopener"><span class="n">↗</span>智能硬件创业图谱 · 机器人赛道视图——宇树、智元等本体创业者的关系网络</a>
-      <a href="https://ai.jasonlin.tech/" target="_blank" rel="noopener"><span class="n">↗</span>AI 学者图谱 · 具身大模型背后的研究者与师承脉络</a>
-      <a href="https://aipodcast.jasonlin.tech/#/browse?field=robotics" target="_blank" rel="noopener"><span class="n">↗</span>AI Podcast · 机器人议题——40+ 期双语全文访谈，含李飞飞、Chelsea Finn、Elon Musk</a>
-      <a href="https://aipaper.jasonlin.tech/#/papers?field=robotics" target="_blank" rel="noopener"><span class="n">↗</span>AI Paper · 机器人论文——20+ 篇双语精读，含 π0.5、GR-3、RoboBrain 2.0</a>
+  <nav class="lk" aria-label="延伸查阅">
+    <div class="lk-head">LOOKUP&nbsp;·&nbsp;文中人物、访谈与论文，可延伸查阅</div>
+    <div class="lk-grid">
+      <a class="lk-card" href="https://hardware.jasonlin.tech/?filter=robotics" target="_blank" rel="noopener">
+        <div class="lk-top"><span class="lk-kind">关系图谱</span><span class="lk-go">↗</span></div>
+        <div class="lk-name">智能硬件创业图谱</div>
+        <div class="lk-view">机器人赛道视图 · 打开即筛选</div>
+        <div class="lk-desc">宇树、智元等本体创业者与背后投资人的关系网络</div>
+        <div class="lk-foot"><span class="lk-stat">160+ 人</span><span>hardware.jasonlin.tech</span></div>
+      </a>
+      <a class="lk-card" href="https://ai.jasonlin.tech/" target="_blank" rel="noopener">
+        <div class="lk-top"><span class="lk-kind">关系图谱</span><span class="lk-go">↗</span></div>
+        <div class="lk-name">AI 学者图谱</div>
+        <div class="lk-view">见 RL &amp; Robotics 分类</div>
+        <div class="lk-desc">具身大模型背后的研究者、师承脉络与代表论文</div>
+        <div class="lk-foot"><span class="lk-stat">175+ 人</span><span>ai.jasonlin.tech</span></div>
+      </a>
+      <a class="lk-card" href="https://aipodcast.jasonlin.tech/#/browse?field=robotics" target="_blank" rel="noopener">
+        <div class="lk-top"><span class="lk-kind">双语访谈</span><span class="lk-go">↗</span></div>
+        <div class="lk-name">AI Podcast</div>
+        <div class="lk-view">机器人议题 · 打开即筛选</div>
+        <div class="lk-desc">李飞飞、Chelsea Finn、Elon Musk 等人的播客双语全文与核心观点</div>
+        <div class="lk-foot"><span class="lk-stat">45+ 期</span><span>aipodcast.jasonlin.tech</span></div>
+      </a>
+      <a class="lk-card" href="https://aipaper.jasonlin.tech/#/papers?field=robotics" target="_blank" rel="noopener">
+        <div class="lk-top"><span class="lk-kind">双语论文</span><span class="lk-go">↗</span></div>
+        <div class="lk-name">AI Paper</div>
+        <div class="lk-view">机器人论文 · 打开即筛选</div>
+        <div class="lk-desc">π0.5、GR-3、RoboBrain 2.0 等 VLA 与具身模型逐篇精读</div>
+        <div class="lk-foot"><span class="lk-stat">25+ 篇</span><span>aipaper.jasonlin.tech</span></div>
+      </a>
     </div>
   </nav>
 
