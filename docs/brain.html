@@ -13,6 +13,7 @@
 <meta property="og:url" content="https://robot.jasonlin.tech/brain.html">
 <meta property="og:image" content="https://robot.jasonlin.tech/og-brain.png">
 <meta name="twitter:card" content="summary_large_image">
+<meta itemprop="image" content="https://robot.jasonlin.tech/wx-brain.jpg">
 <!-- 统计：与四张图谱共用同一个 Umami website，在后台按 hostname 区分站点 -->
 <script defer src="https://cloud.umami.is/script.js" data-website-id="d325eb73-0d8f-4529-aa76-f32ebfd92226"></script>
 <style>
@@ -268,6 +269,8 @@ html { scroll-behavior:smooth; }
 </style>
 </head>
 <body>
+<!-- 微信分享缩略图：微信不读 og:image，只抓 body 顶部的 <img>，要求 ≥300x300 且 JPG。改图后需换 URL 或加 ?v= 才能绕过微信缓存。 -->
+<div style="display:none" aria-hidden="true"><img src="https://robot.jasonlin.tech/wx-brain.jpg" width="500" height="500" alt="具身大脑全景分析 · 具身智能三部曲 03"></div>
 <div class="wrap">
 
   <div class="topbar">
