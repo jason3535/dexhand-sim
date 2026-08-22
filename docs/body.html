@@ -207,6 +207,32 @@ html { scroll-behavior:smooth; }
 .toc-grid a .n { font-family:var(--mono); font-size:11px; color:var(--red); letter-spacing:0.1em; flex:none; }
 .toc-grid a:hover { background:var(--soft); color:var(--red); }
 
+/* ---- 型号等比例对照 ---- */
+.lineup { margin-top:30px; border:1px solid var(--ink); background:var(--paper); }
+.lu-head { display:flex; align-items:center; flex-wrap:wrap; gap:10px 16px; padding:12px 18px;
+  border-bottom:1px solid var(--ink); font-family:var(--mono); font-size:11px; letter-spacing:0.22em; }
+.lu-head::before { content:""; width:7px; height:7px; border-radius:50%; background:var(--red); flex:none; }
+.lu-legend { display:flex; gap:14px; margin-left:auto; letter-spacing:0.04em; color:var(--muted); }
+.lu-legend span { display:flex; align-items:center; gap:5px; }
+.lu-legend i { width:9px; height:9px; flex:none; }
+.lu-legend i.u { background:var(--red); }
+.lu-legend i.c { background:var(--ink); }
+.lu-legend i.a { border:1.5px solid var(--ink); background:transparent; }
+.lu-scroll { overflow-x:auto; padding:20px 14px 8px; }
+.lu-svg { display:block; width:100%; min-width:760px; height:auto; }
+.lu-grid { stroke:var(--line); stroke-width:1; stroke-dasharray:2 5; }
+.lu-base { stroke:var(--ink); stroke-width:1.5; }
+.lu-gridlab { font-family:var(--mono); font-size:9.5px; fill:var(--faint); }
+.lu-h { font-family:var(--mono); font-size:11px; fill:var(--ink); font-weight:700; }
+.lu-brand { font-family:var(--mono); font-size:9.5px; fill:var(--faint); letter-spacing:0.06em; }
+.lu-name { font-size:12px; fill:var(--ink); font-weight:700; }
+.lu-fig.lu-unitree * { fill:var(--red); }
+.lu-fig.lu-cn * { fill:var(--ink); }
+.lu-fig.lu-us * { fill:none; stroke:var(--ink); stroke-width:1.6; }
+.lu-hint { display:none; }
+.lu-note { padding:10px 18px 14px; border-top:1px solid var(--line);
+  font-size:12px; color:var(--muted); line-height:1.65; }
+
 /* ---- 延伸查阅卡片 ---- */
 .lk { margin-top:44px; }
 .lk-head { display:flex; align-items:center; gap:10px; margin-bottom:16px;
@@ -247,6 +273,8 @@ html { scroll-behavior:smooth; }
   .vs-row { grid-template-columns:1fr 92px 1fr; }
   .plate-row { grid-template-columns:1fr; }
   .toc-grid { grid-template-columns:1fr 1fr; }
+  .lu-hint { display:block; padding:0 18px 12px; font-family:var(--mono);
+    font-size:11px; color:var(--faint); letter-spacing:0.04em; }
   .lk-grid { grid-template-columns:1fr; gap:12px; }
   .lk-card { padding:18px 18px 15px; }
 }
@@ -440,6 +468,133 @@ html { scroll-behavior:smooth; }
       <span><i class="dot-keep"></i>小批量交付/试点</span>
       <span><i class="dot-no"></i>尚未真正出货</span>
     </div>
+
+    <div class="lineup">
+      <div class="lu-head">LINEUP&nbsp;·&nbsp;型号等比例对照
+        <span class="lu-legend">
+          <span><i class="u"></i>宇树</span>
+          <span><i class="c"></i>其他中国厂商</span>
+          <span><i class="a"></i>美国厂商</span>
+        </span>
+      </div>
+      <div class="lu-scroll">
+<svg class="lu-svg" viewBox="0 0 1052 300" role="img" aria-label="八款人形机器人等比例身高对照">
+<title>人形本体型号等比例对照</title>
+<line class="lu-grid" x1="38" y1="177.0" x2="1014" y2="177.0"/>
+<text class="lu-gridlab" x="30" y="180.5" text-anchor="end">0.5m</text>
+<line class="lu-grid" x1="38" y1="118.0" x2="1014" y2="118.0"/>
+<text class="lu-gridlab" x="30" y="121.5" text-anchor="end">1m</text>
+<line class="lu-grid" x1="38" y1="59.0" x2="1014" y2="59.0"/>
+<text class="lu-gridlab" x="30" y="62.5" text-anchor="end">1.5m</text>
+<line class="lu-base" x1="38" y1="236.0" x2="1014" y2="236.0"/>
+<g class="lu-fig lu-unitree">
+<circle cx="113.0" cy="102.1" r="8.9"/>
+<rect x="103.4" y="112.3" width="19.1" height="58.8" rx="5.7"/>
+<rect x="97.9" y="114.0" width="4.9" height="57.6" rx="2.5"/>
+<rect x="123.1" y="114.0" width="4.9" height="57.6" rx="2.5"/>
+<rect x="104.6" y="171.0" width="6.8" height="65.0" rx="2.8"/>
+<rect x="114.6" y="171.0" width="6.8" height="65.0" rx="2.8"/>
+</g>
+<text class="lu-h" x="113.0" y="84.2" text-anchor="middle">1.21m</text>
+<text class="lu-brand" x="113.0" y="256" text-anchor="middle">宇树</text>
+<text class="lu-name" x="113.0" y="272" text-anchor="middle">R1</text>
+<g class="lu-fig lu-unitree">
+<circle cx="231.0" cy="89.9" r="9.7"/>
+<rect x="219.3" y="101.0" width="23.4" height="64.1" rx="7.0"/>
+<rect x="212.6" y="102.9" width="6.0" height="62.8" rx="3.0"/>
+<rect x="243.4" y="102.9" width="6.0" height="62.8" rx="3.0"/>
+<rect x="220.8" y="165.1" width="8.3" height="70.9" rx="3.5"/>
+<rect x="232.9" y="165.1" width="8.3" height="70.9" rx="3.5"/>
+</g>
+<text class="lu-h" x="231.0" y="71.2" text-anchor="middle">1.32m</text>
+<text class="lu-brand" x="231.0" y="256" text-anchor="middle">宇树</text>
+<text class="lu-name" x="231.0" y="272" text-anchor="middle">G1</text>
+<g class="lu-fig lu-unitree">
+<circle cx="349.0" cy="36.8" r="13.2"/>
+<rect x="328.8" y="51.9" width="40.3" height="87.4" rx="12.1"/>
+<rect x="317.2" y="54.5" width="10.4" height="85.7" rx="5.2"/>
+<rect x="370.4" y="54.5" width="10.4" height="85.7" rx="5.2"/>
+<rect x="331.4" y="139.4" width="14.3" height="96.6" rx="6.0"/>
+<rect x="352.3" y="139.4" width="14.3" height="96.6" rx="6.0"/>
+</g>
+<text class="lu-h" x="349.0" y="14.6" text-anchor="middle">1.80m</text>
+<text class="lu-brand" x="349.0" y="256" text-anchor="middle">宇树</text>
+<text class="lu-name" x="349.0" y="272" text-anchor="middle">H2</text>
+<g class="lu-fig lu-cn">
+<circle cx="467.0" cy="48.9" r="12.4"/>
+<rect x="448.2" y="63.2" width="37.7" height="82.1" rx="11.3"/>
+<rect x="437.3" y="65.6" width="9.7" height="80.5" rx="4.8"/>
+<rect x="487.0" y="65.6" width="9.7" height="80.5" rx="4.8"/>
+<rect x="450.5" y="145.3" width="13.4" height="90.7" rx="5.6"/>
+<rect x="470.1" y="145.3" width="13.4" height="90.7" rx="5.6"/>
+</g>
+<text class="lu-h" x="467.0" y="27.6" text-anchor="middle">1.69m</text>
+<text class="lu-brand" x="467.0" y="256" text-anchor="middle">智元</text>
+<text class="lu-name" x="467.0" y="272" text-anchor="middle">远征 A2</text>
+<g class="lu-fig lu-cn">
+<circle cx="585.0" cy="41.2" r="12.9"/>
+<rect x="566.8" y="56.0" width="36.3" height="85.5" rx="10.9"/>
+<rect x="556.4" y="58.5" width="9.3" height="83.8" rx="4.7"/>
+<rect x="604.3" y="58.5" width="9.3" height="83.8" rx="4.7"/>
+<rect x="569.1" y="141.5" width="12.9" height="94.5" rx="5.4"/>
+<rect x="588.0" y="141.5" width="12.9" height="94.5" rx="5.4"/>
+</g>
+<text class="lu-h" x="585.0" y="19.3" text-anchor="middle">1.76m</text>
+<text class="lu-brand" x="585.0" y="256" text-anchor="middle">优必选</text>
+<text class="lu-name" x="585.0" y="272" text-anchor="middle">Walker S2</text>
+<g class="lu-fig lu-us">
+<circle cx="703.0" cy="44.5" r="12.7"/>
+<rect x="684.9" y="59.1" width="36.2" height="84.0" rx="10.8"/>
+<rect x="674.5" y="61.5" width="9.3" height="82.4" rx="4.6"/>
+<rect x="722.2" y="61.5" width="9.3" height="82.4" rx="4.6"/>
+<rect x="687.2" y="143.1" width="12.8" height="92.9" rx="5.4"/>
+<rect x="706.0" y="143.1" width="12.8" height="92.9" rx="5.4"/>
+</g>
+<text class="lu-h" x="703.0" y="22.9" text-anchor="middle">1.73m</text>
+<text class="lu-brand" x="703.0" y="256" text-anchor="middle">Tesla</text>
+<text class="lu-name" x="703.0" y="272" text-anchor="middle">Optimus</text>
+<g class="lu-fig lu-us">
+<circle cx="821.0" cy="44.5" r="12.7"/>
+<rect x="802.5" y="59.1" width="37.0" height="84.0" rx="11.1"/>
+<rect x="791.8" y="61.5" width="9.5" height="82.4" rx="4.8"/>
+<rect x="840.6" y="61.5" width="9.5" height="82.4" rx="4.8"/>
+<rect x="804.8" y="143.1" width="13.1" height="92.9" rx="5.5"/>
+<rect x="824.1" y="143.1" width="13.1" height="92.9" rx="5.5"/>
+</g>
+<text class="lu-h" x="821.0" y="22.9" text-anchor="middle">1.73m</text>
+<text class="lu-brand" x="821.0" y="256" text-anchor="middle">Figure</text>
+<text class="lu-name" x="821.0" y="272" text-anchor="middle">Figure 03</text>
+<g class="lu-fig lu-us">
+<circle cx="939.0" cy="52.3" r="12.1"/>
+<rect x="925.1" y="66.2" width="27.9" height="80.6" rx="8.4"/>
+<rect x="917.0" y="68.6" width="7.2" height="79.0" rx="3.6"/>
+<rect x="953.8" y="68.6" width="7.2" height="79.0" rx="3.6"/>
+<rect x="926.8" y="146.9" width="9.9" height="89.1" rx="4.2"/>
+<rect x="941.3" y="146.9" width="9.9" height="89.1" rx="4.2"/>
+</g>
+<text class="lu-h" x="939.0" y="31.1" text-anchor="middle">1.66m</text>
+<text class="lu-brand" x="939.0" y="256" text-anchor="middle">1X</text>
+<text class="lu-name" x="939.0" y="272" text-anchor="middle">NEO</text>
+</svg>
+      </div>
+      <div class="lu-hint">← 横向滑动查看全部 8 款 →</div>
+      <div class="lu-note">同一像素/米换算、基线对齐，身高可直接横向比较；剪影体宽按体重换算，非外观还原。参数为各厂商公开资料，"—" 表示未公开，引用前请复核。</div>
+    </div>
+    <p class="body-p"><b>把八款摆在同一条基线上，两件事立刻显形：</b>其一，<b>全尺寸是共识，小尺寸是宇树独有的选择</b>——除宇树 R1/G1 外，所有型号都挤在 1.66–1.80 m 这个"成年人区间"，因为要复用人类的工具、门把手和货架；宇树用 1.21 m 和 1.32 m 单独开了一条便宜、安全、够用的开发者线，这正是它出货量领先的结构性原因。其二，<b>自由度不是越高越值钱</b>：Walker S2 的 52 自由度是宇树 G1 的两倍多，但真正决定能否量产的是每个自由度的成本与可靠性——宇树用 23 个自由度做到 9.9 万，把"够用"变成了商品。</p>
+
+    <div class="tbl" style="margin-top:14px"><table>
+      <thead><tr><th>型号</th><th>身高</th><th>体重</th><th>自由度</th><th>价格</th><th>状态（2026-08）</th></tr></thead>
+      <tbody>
+        <tr class="hot"><td><b>宇树 R1</b></td><td class="num">1.21 m</td><td class="num">25 kg</td><td class="num">26</td><td class="num">¥2.99 万</td><td>现货在售；首发 3.99 万后官降一万</td></tr>
+        <tr class="hot"><td><b>宇树 G1</b></td><td class="num">1.32 m</td><td class="num">35 kg</td><td class="num">23</td><td class="num">¥9.9 万</td><td>在售，高校与开发者的事实标准机</td></tr>
+        <tr class="hot"><td><b>宇树 H2</b></td><td class="num">1.80 m</td><td class="num">70 kg</td><td class="num">31</td><td class="num">未公布</td><td>全尺寸旗舰，2025 发布</td></tr>
+        <tr><td><b>智元 远征 A2</b></td><td class="num">1.69 m</td><td class="num">69 kg</td><td class="num">40+</td><td class="num">未公开零售</td><td>交付中，主打交互与导览</td></tr>
+        <tr><td><b>优必选 Walker S2</b></td><td class="num">1.76 m</td><td class="num">—</td><td class="num">52</td><td class="num">未公开零售</td><td>工业向，热插拔换电、宣称订单 1.3 万台</td></tr>
+        <tr><td><b>Tesla Optimus Gen 3</b></td><td class="num">1.73 m</td><td class="num">57 kg</td><td class="num">28+</td><td class="num">目标 &lt;$30k</td><td>未正式发布，Fremont 小批量爬坡</td></tr>
+        <tr><td><b>Figure 03</b></td><td class="num">1.73 m</td><td class="num">61 kg</td><td class="num">—</td><td class="num">不零售</td><td>累计下线 1000+，BMW 物流线部署</td></tr>
+        <tr><td><b>1X NEO</b></td><td class="num">1.66 m</td><td class="num">30 kg</td><td class="num">21</td><td class="num">$20k / $499 月租</td><td>家庭场景，2026 交付，腱驱柔顺</td></tr>
+      </tbody>
+    </table></div>
     <p class="body-p"><b>最值得玩味的对比是宇树和 Figure：</b>一个用 5500 台出货和 3 亿净利换来 610 亿人民币发行市值；一个用零公开销量和一个漂亮的大脑 demo 拿到 390 亿美元估值。资本市场同时在给"确定的制造"和"可能的智能"定价，而且给后者的价格高一个数量级——这本身就是对"大脑才是终局价值"的投票。</p>
   </div>
 
