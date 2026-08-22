@@ -10,4 +10,7 @@ mujoco_menagerie/
 # MuJoCo 运行时吐的日志
 MUJOCO_LOG.TXT
 
+# Claude Code 的临时 git 工作树，整份仓库副本，别提交
+.claude/
+
 .DS_Store
